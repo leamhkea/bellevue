@@ -24,7 +24,9 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body>
-        <header>{/* <Header /> */}</header>
+        <header>
+          <Header/>
+        </header>
         <main>{children}</main>
         <footer>{/* <Footer /> */}</footer>
       </body>
