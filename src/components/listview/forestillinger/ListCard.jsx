@@ -11,9 +11,9 @@ export default function ListClient({ items = [] }) {
       <div>
         {items.map((item) => (
           <div key={item.id}>
-            <h2>{item.name}</h2>
-            <p>Pris: {item.price} kr</p>
-            <p>{item.description}</p>
+            <h2 className="--moerkblaa-600">{item.name}</h2>
+            <p className="--moerkblaa-600">Pris: {item.price} kr</p>
+            <p className="--moerkblaa-600">{item.description}</p>
 
             {item.image?.[0] && (
               <img
