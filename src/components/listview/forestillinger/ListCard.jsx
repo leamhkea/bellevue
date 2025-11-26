@@ -6,7 +6,7 @@ export default function ListClient({ items = [] }) {
   if (!items.length) return <p>Ingen items fundet</p>;
 
   return (
-    <div >
+    <li >
       <h1>Bellevue_tems fra tabel testside</h1>
 
       {/* Herunder hentes data ind  rounded-xl shadow-blue-100*/}
@@ -33,6 +33,6 @@ export default function ListClient({ items = [] }) {
           </div>
         ))}
       </div>
-    </div>
+    </li>
   );
 }
