@@ -14,18 +14,19 @@ export default function ListClient({ items = [] }) {
             className="bg-(--beige-100) p-10 mb-20 flex justify-between"
           >
             {/* Container VENSTRE */}
-            <div>
+            <div className="grid gap-5">
               {/* Container for tid + tag */}
-              <div className="w-100">
-                <div className="grid grid-cols-3">
+              <div className="w-150">
+                <div className="grid grid-cols-2 gap-30">
+                  {/* <div className="grid grid-cols-[1fr_5px_1fr] gap-30"> */}
                   <p>{item.date}</p>
-                  <p>|</p>
+                  {/* <p>|</p> */}
                   <p>{item.tags}</p>
                 </div>
               </div>
 
               {/* Container for heading */}
-              <h2>{item.name}</h2>
+              <h2 className="text-4xl">{item.name}</h2>
             </div>
 
             {/* Container HØJRE */}
