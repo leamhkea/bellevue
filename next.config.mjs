@@ -4,6 +4,7 @@ const nextConfig = {
     optimizeCss: false,
   },
 
+  //gjort img sikre
   images: {
     remotePatterns: [
       {
