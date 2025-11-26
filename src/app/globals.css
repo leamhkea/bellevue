@@ -1,6 +1,67 @@
+/*  =================== HERUNDER ER ALLE IMPORTS =================== */
 @import "tailwindcss";
 
+/*  ================ CUSTOM PROPORTIES OG VARIABLER ================ */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Basic */
+  --sort: #000000;
+  --hvid: #ffffff;
+
+  /* Mørk blå */
+  --moerkblaa-900: #04131e;
+  --moerkblaa-600: #0a2a43;
+  --moerkblaa-300: #7690a9;
+  --moerkblaa-100: #d9dfe7;
+
+  /* Kobolt blå */
+  --koboltblaa-900: #001d4c;
+  --koboltblaa-600: #003f9e;
+  --koboltblaa-300: #7ea4da;
+  --koboltblaa-100: #d7e0f5;
+
+  /* Bellevue blå */
+  --bellevueblaa-900: #0c4470;
+  --bellevueblaa-600: #1c82c2;
+  --bellevueblaa-300: #89bbd4;
+  --bellevueblaa-100: #d7e7f3;
+
+  /* Beige */
+  --beige-900: #d4c9b4;
+  --beige-600: #f2ede3;
+  --beige-300: #efe8db;
+  --beige-100: #faf7f1;
+
+  /* Rød */
+  --roed-900: #5c0305;
+  --roed-600: #ae1115;
+  --roed-300: #d48072;
+  --roed-100: #f9d7d2;
+
+  /* Gul */
+  --gul-900: #b38a25;
+  --gul-600: #fdd777;
+  --gul-300: #f8d98b;
+  --gul-100: #fff1c6;
+
+  /*spacing*/
+  --content-width: max(20px, 50% - 80rem / 2);
+
+  /* Font family */
+  --font-text: "Inter", sans-serif;
+  --font-heading: "Oswald", sans-serif;
+}
+
+/*  =================== STYLING AF HEADING + TEXT ================== */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  color: var(--moerkblaa-900);
+}
+
+body {
+  font-family: var(--font-text);
 }

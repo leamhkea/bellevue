@@ -17,6 +17,12 @@ export const viewport = {
 export default function RootLayout({ children }) {
   return (
     <html lang="da">
+      <head>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Oswald:wght@200..700&display=swap"
+          rel="stylesheet"
+        />
+      </head>
       <body>
         <header>{/* <Header /> */}</header>
         <main>{children}</main>

@@ -1,4 +1,5 @@
-import ListClient from "./ListClient";
+import KalenderCard from "./kalender/KalenderCard";
+import ListCard from "./forestillinger/ListCard";
 import { createClient } from "@supabase/supabase-js";
 
 // Supabase client (fungerer som server)
@@ -22,5 +23,10 @@ export default async function ListServer() {
   console.log("Fetched data:", data);
 
   // Returnerer data ellers tomt array
-  return <ListClient items={data || []} />;
+  return (
+    <div>
+      <KalenderCard items={data || []} />
+      <ListCard items={data || []} />
+    </div>
+  );
 }
