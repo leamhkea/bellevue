@@ -6,8 +6,6 @@ export default function ListClient({ items = [] }) {
 
   return (
     <li>
-      <h1>Bellevue_tems fra tabel testside</h1>
-
       {/* Herunder hentes data ind */}
       <div>
         {items.map((item) => (
@@ -32,14 +30,13 @@ export default function ListClient({ items = [] }) {
 
             {/* Container HØJRE */}
             <div>
-              <div className="px-12 py-6 border border-(--bellevueblaa-600)">
-                <a
-                  href="https://www.ticketmaster.dk/artist/folk-og-rovere-i-kardemommeby-billetter/871667?brand=dk_bellevue&language=da-dk&venueId=305"
-                  target="_blank"
-                >
-                  Køb billet
-                </a>
-              </div>
+              <a
+                className="px-9 py-3 rounded-4xl border border-(--bellevueblaa-600) text-(--bellevueblaa-600)"
+                href="https://www.ticketmaster.dk/artist/folk-og-rovere-i-kardemommeby-billetter/871667?brand=dk_bellevue&language=da-dk&venueId=305"
+                target="_blank"
+              >
+                Køb billet
+              </a>
             </div>
           </div>
         ))}

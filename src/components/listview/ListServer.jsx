@@ -25,10 +25,9 @@ export default async function ListServer() {
   // Returnerer data ellers tomt array
   return (
     <div>
-      <ul>
-        <KalenderCard items={data || []} />
-      </ul>
-      <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
+      <KalenderCard items={data || []} />
+
+      <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-30 mt-4">
         <ListCard items={data || []} />
       </ul>
     </div>
