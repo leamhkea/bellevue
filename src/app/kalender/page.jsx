@@ -1,5 +1,11 @@
+import KalenderServer from "@/components/listview/kalender/KalenderServer";
+
 const Kalender = () => {
-  return <div></div>;
+  return (
+    <div>
+      <KalenderServer />
+    </div>
+  );
 };
 
 export default Kalender;

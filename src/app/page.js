@@ -1,4 +1,4 @@
-import ListServer from "@/components/listview/ListServer";
+import ListServer from "@/components/listview/forestillinger/ListServer";
 
 export default function Home() {
   return (
