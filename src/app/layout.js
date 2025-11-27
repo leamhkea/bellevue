@@ -27,7 +27,9 @@ export default function RootLayout({ children }) {
         <header>
           <Header/>
         </header>
-        <main>{children}</main>
+        <main
+        className="py-10"
+        >{children}</main>
         <footer><Footer /></footer>
       </body>
     </html>
