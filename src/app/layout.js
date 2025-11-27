@@ -28,9 +28,8 @@ export default function RootLayout({ children }) {
           <Header/>
         </header>
         <main
-        className="py-10"
-        >{children}
-        </main>
+        className="py-40"
+        >{children}</main>
         <footer><Footer /></footer>
       </body>
     </html>
