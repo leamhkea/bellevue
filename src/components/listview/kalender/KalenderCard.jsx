@@ -26,7 +26,7 @@ const KalenderCard = ({ item, time }) => {
   const noBottomRadius = isOpen || isClosing;
 
   return (
-    <li className="mb-10">
+    <li>
       <div className="transition-colors duration-300">
         {/* ============================= CARD ============================= */}
         <div

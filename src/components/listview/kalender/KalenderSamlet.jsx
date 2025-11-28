@@ -4,6 +4,7 @@ import { parse } from "date-fns";
 import { da } from "date-fns/locale";
 import KalenderCard from "./KalenderCard";
 
+// ======================================= ALT LOGIKKEN FOR KALENDER ============================================
 const KalenderSamlet = ({ items }) => {
   if (!items?.length) return <p>Ingen items fundet</p>;
 
@@ -63,6 +64,7 @@ const KalenderSamlet = ({ items }) => {
       }));
   }, [items]);
 
+  // ======================================= ALT STYLING OG OPSÆTNING ============================================
   return (
     <div className="grid gap-20 px-(--content-width) w-full">
       <h1 className="text-6xl">KALENDER</h1>
@@ -87,7 +89,8 @@ const KalenderSamlet = ({ items }) => {
             </h3>
           </div>
 
-          <ul className="flex flex-col gap-10">
+          {/* Herunder laves listen af cards */}
+          <ul className="grid gap-10">
             {shows.map(({ item, time }, i) => (
               <KalenderCard key={item.id + "-" + i} item={item} time={time} />
             ))}
