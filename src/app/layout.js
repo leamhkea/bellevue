@@ -1,7 +1,7 @@
 //imports af egne komponenter
 import "./globals.css";
 import "./reset.css";
-import Header from "@/components/global/Header";
+import Header from "@/components/global/header/Header";
 import Footer from "@/components/global/Footer";
 
 export const metadata = {

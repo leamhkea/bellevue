@@ -60,7 +60,15 @@ h5,
 h6 {
   font-family: var(--font-heading);
   color: var(--moerkblaa-900);
+  text-wrap: balance;
 }
+
+blockquote {
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-size:x-large;
+  text-wrap: balance;
+} 
 
 body {
   font-family: var(--font-text);

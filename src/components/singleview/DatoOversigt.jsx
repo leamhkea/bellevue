@@ -4,7 +4,7 @@ import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
 import { parse } from "date-fns";
 import { da } from "date-fns/locale";
-import AnchorTagPrimaryButton from "../global/AnchorTagPrimaryButton";
+import AnchorTagPrimaryButton from "../global/knapper/AnchorTagPrimaryButton";
 
 const DatoOversigt = ({ item }) => {
   const [selected, setSelected] = useState(null);

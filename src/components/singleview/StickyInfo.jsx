@@ -1,6 +1,6 @@
 const StickyInfo = ({item}) => {
     return ( 
-        <div className="flex flex-col gap-20 max-w-200 p-10">
+        <div className="flex flex-col gap-20 max-w-200 p-10 backdrop-blur-3xl rounded-2xl">
              <h1>{item.name}</h1>
         <div className="h-full z-10 flex gap-20">
 
@@ -12,7 +12,7 @@ const StickyInfo = ({item}) => {
 
                     <div>
                     <h3>Varighed</h3>
-                    <p>{item.date}</p>
+                    <p>{item.varighed}</p>
                     </div>
             </div>
 
@@ -24,7 +24,7 @@ const StickyInfo = ({item}) => {
 
                     <div>
                     <h3>Alder</h3>
-                    <p>{item.date}</p>
+                    <p>{item.alder}</p>
                     </div>
             </div>
         </div>
@@ -32,6 +32,15 @@ const StickyInfo = ({item}) => {
         <div>
             <p>{item.description_short}</p>
         </div>
+        {item.embed ? (
+            <iframe title={`trailer af ${item.name}`}
+                    src={item.embed}
+                    className="h-80 w-full rounded-lg"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    ></iframe>
+          ) : null  }
     </div>
      );
 }
