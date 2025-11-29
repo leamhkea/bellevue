@@ -1,52 +1,67 @@
 "use client";
-import { useState } from "react";
-import ListCardDropDown from "@/components/listview/listeviewhero/ListCardDropDown";
+import { useState, useEffect } from "react";
+import ListCard from "@/components/listview/forestillinger/ListCard";
+import { createClient } from "@supabase/supabase-js";
+import ListCardDropDown from "./ListCardDropDown";
 
-const ListOrCalendar = () => {
+const supabase = createClient(
+  "https://rzwaokiepaobrlrpphia.supabase.co",
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+);
+
+export default function ListCardHero() {
   const [activeFilter, setActiveFilter] = useState("forestillinger");
+  const [items, setItems] = useState([]);
+
+  // Fetch data fra Supabase
+  useEffect(() => {
+    async function fetchData() {
+      const { data, error } = await supabase.from("bellevue_items").select("*");
+      if (error) {
+        console.error(error);
+        return;
+      }
+      setItems(data || []);
+    }
+    fetchData();
+  }, []);
 
   return (
-    <div>
-      {/* FILTER TOGGLER */}
-      <div className="flex gap-5 mb-5 text-8xl">
-        <h1 
+      <div>
+      {/* FILTER KNAPPER */}
+      <div className="pl-10 flex gap-0 mb-5 text-7xl">
+        <h1
           onClick={() => setActiveFilter("forestillinger")}
-          className= {`cursor-pointer ${
-            activeFilter === "forestillinger" ? "font-bold text-blue-500" : "text-gray-500"
+          className={`cursor-pointer pr-5 border-b-4 ${
+            activeFilter === "forestillinger"
+              ? "!text-blue-900 border-b-4 " : "!text-blue-100 border-b-4"
           }`}
         >
           FORESTILLINGER
         </h1>
 
-        <h1 
+        <h1
           onClick={() => setActiveFilter("arkiv")}
-          className={`cursor-pointer ${
-            activeFilter === "arkiv" ? "font-bold text-blue-500" : "text-gray-500"
+          className={`cursor-pointer pl-5 border-b-4 ${
+            activeFilter === "arkiv"
+              ? "!text-blue-900 border-b-4 " : "!text-blue-100 border-b-4"
           }`}
         >
           ARKIV
         </h1>
+        
       </div>
-
-      {/* CONTENT BASED ON FILTER */}
-      {activeFilter === "forestillinger" && (
-        <div>
-          {/* Listevisning */}
-          <h2 className="text-xl font-semibold mb-3">Listevisning</h2>
-          {/* Her indsætter du dit ListView component */}
-        </div>
-      )}
-
-      {activeFilter === "arkiv" && (
-        <div>
-          {/* Kalendervisning */}
-          <h2 className="text-xl font-semibold mb-3">Arkiv</h2>
-          {/* Her indsætter du dit kalender component */}
-        </div>
-      )}
       <ListCardDropDown />
+
+      {/* CONTENT */}
+      {activeFilter === "forestillinger" ? (
+        <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-30 mt-4">
+          <ListCard items={items} />
+        </ul>
+      ) : (
+        <h1>HER SKAL TIDELIGERE FORESTILLINGER VISES</h1>
+      )}
+
     </div>
   );
-};
-
-export default ListOrCalendar;
+}

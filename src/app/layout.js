@@ -30,7 +30,9 @@ export default function RootLayout({ children }) {
         <main
         className="py-40"
         >{children}</main>
-        <footer><Footer /></footer>
+        <footer>
+          <Footer />
+        </footer>
       </body>
     </html>
   );
