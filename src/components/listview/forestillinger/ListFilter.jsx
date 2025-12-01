@@ -58,23 +58,23 @@ export default function ListFilter({ items = [] }) {
   return (
     <div className="mt-6">
       {/* TABS */}
-      <div className="flex gap-6 mb-6 border-b pb-3 pl-4">
+      <div className="flex gap-6 mb-6 pb-3 ">
         <button
-          className={`text-xl font-semibold ${
-            activeTab === "current" ? "text-blue-800" : "text-blue-300"
+          className={`text-5xl ml-5 ${
+            activeTab === "current" ? "text-blue-800 border-b-4" : "text-blue-300 border-b-4"
           }`}
           onClick={() => setActiveTab("current")}
         >
-          Forestillinger
+          FORESTILLINGER
         </button>
 
         <button
-          className={`text-xl font-semibold ${
-            activeTab === "archive" ? "text-blue-800" : "text-blue-300"
+          className={`text-5xl ${
+            activeTab === "archive" ? "text-blue-800 border-b-4" : "text-blue-300 border-b-4"
           }`}
           onClick={() => setActiveTab("archive")}
         >
-          Arkiv
+          ARKIV
         </button>
       </div>
 
