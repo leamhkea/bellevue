@@ -46,18 +46,18 @@ const Karrusel = ({ children, interval = 10000 }) => {
 
       {/* Slides */}
       {slides.map((slide, index) => (
-        <div
-          key={index}
-          className={`
-            absolute w-full h-full transition-opacity duration-700
-            flex justify-center items-center
-            ${index === current ? "opacity-100" : "opacity-0"}
-          `}
-          onMouseEnter={stopAutoSlide}
-          onMouseLeave={startAutoSlide}
-        >
-          {slide}
-        </div>
+      <div
+        key={index}
+        className={`
+          absolute w-full h-full transition-opacity duration-700
+          flex justify-center items-center
+          ${index === current ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}
+        `}
+        onMouseEnter={stopAutoSlide}
+        onMouseLeave={startAutoSlide}
+      >
+        {slide}
+      </div>
       ))}
 
       {/* knapper */}

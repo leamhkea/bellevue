@@ -1,13 +1,14 @@
 import Image from "next/image";
 
-const BilledKarrusel = ({ billede}) => {
+const BilledKarrusel = ({ billede, item}) => {
   return (
-    <div>
+    <div className="">
         <Image
           src={billede.url}
           alt={billede.alt}
-          fill
-          className="object-cover rounded-lg mb-6 max-h-screen"
+          width={1000}
+          height={1000}
+          className="object-cover rounded-full p-10 max-h-screen"
           />
     </div>
   );

@@ -7,56 +7,11 @@ import Karrusel from "../global/komponenter/Karrusel";
 import Cirkel from "../global/ikoner/Cirkel";
 import AddOns from "./AddOns";
 import BilledKarrusel from "./BilledKarrusel";
-import { useInView } from "react-intersection-observer";
-import { useState, useEffect, useRef } from "react";
+import HorizontalScrollKarrusel from "../global/komponenter/HorizontalScrollKarrusel";
+import SolBaggrund from "../global/ikoner/SolBaggrund";
 
 export default function SingleCard({ item }) {
   if (!item) return <p>Item ikke fundet</p>;
-
-  const firstSnapRef = useRef(null);
-  const [snapCompleted, setSnapCompleted] = useState(false);
-  const lastScrollY = useRef(0);
-
-  const snapCount =
-    (item.anmeldelser?.length ? 1 : 0) +
-    (item.add_ons?.length ? 1 : 0) +
-    (item.billeder?.length ? 1 : 0);
-
-  const [currentSnapIndex, setCurrentSnapIndex] = useState(0);
-
-  // Unlock scroll ved mount
-  useEffect(() => {
-    document.body.style.overflow = "auto";
-    return () => {
-      document.body.style.overflow = "auto";
-    };
-  }, []);
-
-useEffect(() => {
-  const handleScroll = () => {
-  if (!firstSnapRef.current || snapCompleted) return;
-
-  const container = firstSnapRef.current;
-  const containerTop = container.offsetTop;
-  const containerBottom = containerTop + container.offsetHeight;
-
-  const scrollY = window.scrollY || window.pageYOffset;
-  const scrollingDown = scrollY > lastScrollY.current;
-  lastScrollY.current = scrollY;
-
-  // kun lås hvis vi er indenfor containeren
-  if (scrollY >= containerTop && scrollY <= containerBottom - window.innerHeight) {
-    document.body.style.overflow = "hidden";
-  } else {
-    document.body.style.overflow = "auto";
-  }
-};
-
-  window.addEventListener("scroll", handleScroll);
-  return () => window.removeEventListener("scroll", handleScroll);
-}, [snapCompleted]);
-
-
 
   return (
     <div className="flex items-start">
@@ -74,15 +29,16 @@ useEffect(() => {
           )}
         </article>
         <DatoOversigt item={item}/>
-        <div className="p-10 max-w-150">
-          <p>{item.description_long}</p>
+        <div className="p-10 flex gap-10">
+          <p className="max-w-100">{item.description_long}</p>
+          <div className="flex gap-5 items-start">
+          <span className="font-black text-7xl italic font-serif">"</span>
+          <blockquote>{item.quote}</blockquote>
+          </div>
         </div>
-        <div className="scroll-snap-section h-screen w-screen snap-y snap-mandatory"
-        ref={firstSnapRef}
-            >
+        <div className="min-h-screen w-screen">
         {item.anmeldelser ?(
-            <div className="snap-start h-screen w-screen bg-(--bellevueblaa-900) text-(--hvid) p-10 flex flex-col items-center justify-center relative overflow-hidden"
-            onScroll={() => handleSnapInView(0)}>
+            <div className=" h-screen w-screen bg-(--bellevueblaa-900) text-(--hvid) p-10 flex flex-col items-center justify-center overflow-hidden">
                 <div>
                     <Cirkel/>
                 </div>
@@ -97,21 +53,19 @@ useEffect(() => {
     }
 
         {item.add_ons ?(
-            <div className="snap-start h-screen w-screen overflow-hidden"
-            onScroll={() => handleSnapInView(0)}>
-            <Karrusel>
+            <div className=" h-screen w-screen overflow-hidden">
+            <HorizontalScrollKarrusel>
             {item.add_ons.map((addOn) => (
                 <AddOns addOn={addOn} />
             ))}
-            </Karrusel>
+            </HorizontalScrollKarrusel>
 
             </div>
         ):null
     }
 
                 {item.billeder ?(
-                    <div className="snap-start h-screen w-screen overflow-hidden"
-                    onScroll={() => handleSnapInView(0)}>
+                    <div className="h-screen w-screen overflow-hidden">
             <Karrusel>
             {item.billeder.map((billede) => (
                 <BilledKarrusel billede={billede} item={item} />
@@ -122,11 +76,22 @@ useEffect(() => {
         ):null
     }
     </div>
+
+                 {/* {item.embed ? (
+            <iframe title={`trailer af ${item.name}`}
+                    src={item.embed}
+                    className="h-screen w-screen rounded-lg"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    ></iframe>
+          ) : null  } */}
       </section>
 
       {/* sticky kolonne (venstre) */}
-      <aside className="h-[170vh]">
+      <aside className="h-[170vh] relative">
         <div className="sticky top-40">
+        <SolBaggrund item={item} />
           <StickyInfo item={item} />
         </div>
       </aside>

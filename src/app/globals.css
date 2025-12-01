@@ -80,19 +80,10 @@ blockquote {
   text-wrap: balance;
 } 
 
-html, body {
+body {
   font-family: var(--font-text);
   background-color: var(--hvid);
 }
-
-.scroll-snap-container{
-    scroll-snap-type: y mandatory;
-  overflow-y: scroll;
-}
-.scroll-snap-section {
-  scroll-snap-align: start;
-}
-
 
 
 /* REACT DATE PICKER STYLING */
