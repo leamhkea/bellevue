@@ -37,7 +37,7 @@ export default function ListCard({ items = [] }) {
           <div className="pl-3 pb-4 pt-20 text-center">
           <div className="flex flex-row gap-3 w-full">
             <Link
-              href={`/forestillinger/${item.id}`}
+              href={`https://www.ticketmaster.dk/search?q=${encodeURIComponent(item.name)}`}
               className="bg-blue-100 border-(--bellevueblaa-600) text-(--bellevueblaa-600) 
               py-2 px-4 rounded-2xl w-full text-sm md:text-base whitespace-nowrap"
             >
