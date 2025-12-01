@@ -43,7 +43,7 @@ export default function ListCard({ items = [] }) {
                 href={`https://www.ticketmaster.dk/search?q=${encodeURIComponent(
                   item.name
                 )}`}
-                className="bg-blue-100 border-(--bellevueblaa-600) text-(--bellevueblaa-600) 
+                className="bg-blue-100 border border-(--bellevueblaa-600) text-(--bellevueblaa-900) 
               py-2 px-4 rounded-2xl w-full text-sm md:text-base whitespace-nowrap"
               >
                 Køb billet
