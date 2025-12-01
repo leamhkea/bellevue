@@ -28,7 +28,7 @@ export default function ListCard({ items = [] }) {
           <div className="pl-3">
             <div className="grid grid-cols-2">
               <h2 className="text-blue-800 font-bold pt-2">{item.name}</h2>
-              <p className="text-blue-800 font-light text-right"> {item.tags}</p>
+              <p className="text-blue-300 font-light text-right text-sm"> {item.tags}</p>
             </div>
             <p className="text-blue-800 font-light pt-2">Dato: {item.date}</p>
             <p className="text-blue-800 font-light">{item.description}</p>
