@@ -11,7 +11,7 @@ export default function ListCard({ items = [] }) {
         <li
           key={item.id}
           className="rounded-xl border-b-4 border-l-4 border-blue-100 transform transition-transform duration-300 
-          hover:scale-105 cursor-pointer"
+          hover:scale-105 cursor-pointer ml-4 mr-4"
         >
           {item.image?.[0] && (
             <div className="flex shrink-0 w-full">
@@ -28,25 +28,29 @@ export default function ListCard({ items = [] }) {
           <div className="pl-3">
             <div className="grid grid-cols-2">
               <h2 className="text-blue-800 font-bold pt-2">{item.name}</h2>
-              <p className="text-blue-800 font-light"> {item.tags}</p>
+              <p className="text-blue-800 font-light text-right"> {item.tags}</p>
             </div>
             <p className="text-blue-800 font-light pt-2">Dato: {item.date}</p>
             <p className="text-blue-800 font-light">{item.description}</p>
           </div>
 
-          <div className="pl-3 pb-4 pt-20">
+          <div className="pl-3 pb-4 pt-20 text-center">
+          <div className="flex flex-row gap-3 w-full">
             <Link
               href={`/forestillinger/${item.id}`}
-              className="bg-blue-100 text-blue-800 border border-blue-800 pt-2 pb-2 pl-7 pr-7 rounded-2xl mr-4"
+              className="bg-blue-100 text-blue-800 border border-blue-800 
+              py-2 px-4 rounded-2xl w-full text-sm md:text-base whitespace-nowrap"
             >
               Køb billet
             </Link>
             <Link
               href={`/forestillinger/${item.id}`}
-              className=" text-blue-800 border border-blue-800 pt-2 pb-2 pl-7 pr-7 rounded-2xl"
+              className=" bg-blue-100 text-blue-800 border border-blue-800 
+              py-2 px-4 rounded-2xl w-full text-sm md:text-base whitespace-nowrap"
             >
               Læs mere
             </Link>
+            </div>
           </div>
         </li>
       ))}
