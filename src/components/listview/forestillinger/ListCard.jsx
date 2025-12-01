@@ -50,7 +50,7 @@ export default function ListCard({ items = [] }) {
               </Link>
               <Link
                 href={`/forestillinger/${item.id}`}
-                className="bg-(--bellevueblaa-100) text-(--bellevueblaa-900) border border-(--bellevueblaa-900) py-2 px-4 rounded-2xl w-full text-sm md:text-base whitespace-nowrap"
+                className=" text-(--bellevueblaa-900) border border-(--bellevueblaa-900) py-2 px-4 rounded-2xl w-full text-sm md:text-base whitespace-nowrap"
               >
                 Læs mere
               </Link>
