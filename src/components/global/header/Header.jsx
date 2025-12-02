@@ -224,6 +224,36 @@ const Header = () => {
 
               <li className="hover:scale-103 transition-all duration-300">
                 <Link
+                  href="/kontakt"
+                  onClick={() =>
+                    setIsActive(prev =>
+                      prev === "/kontakt" ? null : "/kontakt"
+                    )
+                  }
+                  onMouseEnter={() => setHovered("/kontakt")}
+                  onMouseLeave={() => setHovered(null)}
+                  onFocus={() => setHovered("/kontakt")}
+                  onBlur={() => setHovered(null)}
+                  className="cursor-pointer text-(--hvid) relative"
+                >
+                  Kontakt
+                  <AnimatePresence>
+                    {(hovered === "/kontakt" || active === "/kontakt") && (
+                      <motion.div
+                        key="/kontakt"
+                        initial={{ scale: 0 }}
+                        animate={{ scale: 1 }}
+                        exit={{ scale: 0 }}
+                        transition={{ duration: 0.18, ease: "easeOut" }}
+                        className="absolute -top-3 -left-2 w-10 h-10 rounded-full bg-(--gul-900) -z-100"
+                      />
+                    )}
+                  </AnimatePresence>
+                </Link>
+              </li>
+
+              <li className="hover:scale-103 transition-all duration-300">
+                <Link
                   href="/venneforening"
                   onClick={() =>
                     setIsActive(prev =>
