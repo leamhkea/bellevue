@@ -9,6 +9,8 @@ import ListCardDropDown from "./ListCardDropDown";
 
 export default function ListFilter({ items = [] }) {
   const [activeTab, setActiveTab] = useState("current"); // current / archive
+  const [selectedCategory, setSelectedCategory] = useState(null); // ny state for kategori
+
 
   // Today uden tidszone-problemer
   const today = new Date();
@@ -55,7 +57,25 @@ export default function ListFilter({ items = [] }) {
     (item) => item.latestDate.getTime() < today.getTime()
   );
 
-  const visibleItems = activeTab === "current" ? upcoming : archive;
+  let visibleItems = activeTab === "current" ? upcoming : archive;
+
+        // --- filtrering efter kategori ---
+  if (selectedCategory) {
+    visibleItems = visibleItems.filter((item) =>
+      item.tags?.includes(selectedCategory)
+    );
+  }
+
+  // callback til dropdown
+  const handleFilterChange = (type, value) => {
+    if (type === "category") 
+      setSelectedCategory(value);
+    
+  };
+
+  const removeCategoryFilter = () => setSelectedCategory(null);
+
+
 
   return (
     <div className="mt-6">
@@ -80,13 +100,28 @@ export default function ListFilter({ items = [] }) {
           ARKIV
         </button>
       </div>
-      <ListCardDropDown />
+      <ListCardDropDown onFilterChange={handleFilterChange} />
 
+{/* --- Vis valgt kategori som chip --- */}
+{selectedCategory && (
+        <div className="flex gap-2 mt-4 ml-4">
+          <span className="flex items-center gap-2 border-2 border-blue-400 text-blue-400 px-3 py-1 rounded-2xl text-sm">
+            {selectedCategory}
+            <button
+              onClick={removeCategoryFilter}
+              className="font-bold text-blue-400 hover:text-blue-800"
+            >
+              ×
+            </button>
+          </span>
+        </div>
+      )}
 
       {/* LISTCARD */}
       <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 mt-4">
         <ListCard items={visibleItems} />
       </ul>
+
 
     </div>
   );
