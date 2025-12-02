@@ -62,7 +62,7 @@ h4,
 h5,
 h6 {
   font-family: var(--font-heading);
-  color: var(--moerkblaa-900);
+  color: var(--moerkblaa-600);
   text-wrap: balance;
 }
 
@@ -99,6 +99,14 @@ body {
 
 .bellevueblaa-600 h1 {
   color: var(--bellevueblaa-600);
+}
+
+.koboltblaa-600 {
+  color: var(--koboltblaa-600);
+}
+
+.moerkblaa-600 {
+  color: var(--moerkblaa-600);
 }
 
 /* REACT DATE PICKER STYLING */

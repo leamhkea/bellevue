@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const BilledKarrusel = ({ billede, item}) => {
   return (
-    <div className="">
+    <div>
         <Image
           src={billede.url}
           alt={billede.alt}
