@@ -8,7 +8,7 @@ import ListCard from "./ListCard";
 import ListCardDropDown from "./ListCardDropDown";
 import WipeLineAnimation from "@/components/global/animationer/WipeLineAnimarion";
 
-export default function ListFilter({ items = [] }) {
+export default function ListFilter({ items }) {
   const [activeTab, setActiveTab] = useState("current"); // current / archive
   const [selectedCategory, setSelectedCategory] = useState(null); // ny state for kategori
 

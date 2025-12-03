@@ -3,9 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import AnchorTagPrimaryButton from "@/components/global/knapper/AnchorTagPrimaryButton";
 
-export default function ListCard({ items = [] }) {
-  if (!items.length) return <p>Ingen items fundet</p>;
-
+export default function ListCard({ items }) {
   return (
     <>
       {items.map((item) => (
