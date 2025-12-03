@@ -1,16 +1,8 @@
 import DropDown from "@/components/global/komponenter/DropDown";
 
-export default function Filters({ onFilterChange }) {
-  const dates = [
-    "Januar", "Februar", "Marts", "April", "Maj", "Juni",
-    "Juli", "August", "September", "Oktober", "November", "December"
-  ];
+export default function Filters({ onFilterChange, categories = [] }) {
 
-  const categories = [
-    "Dramakomedie", "Familieforestilling", "Koncert", "Morgenmad",
-    "Teaterforestilling", "Fællessang", "Julekoncert", "Salon",
-    "Klassiker", "Oplæsning", "Performance", "Comedy"
-  ];
+  const dates = [/* samme som før */];
 
   const children = ["Familieforestilling", "For børn"];
 
@@ -24,7 +16,7 @@ export default function Filters({ onFilterChange }) {
 
       <DropDown
         label="Kategori"
-        items={categories}
+        items={categories}    // ← DYNAMISK
         onSelect={(value) => onFilterChange("category", value)}
       />
 

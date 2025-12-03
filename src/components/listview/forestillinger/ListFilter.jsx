@@ -48,6 +48,12 @@ export default function ListFilter({ items = [] }) {
       .filter(Boolean); // fjern nulls
   }, [items]);
 
+  // Dynamiske kategorier ud fra Supabase data
+const dynamicCategories = useMemo(() => {
+  const allTags = items.flatMap(item => item.tags || []);
+  return [...new Set(allTags)]; // fjern dubletter
+}, [items]);
+
   // Filtrering
   const upcoming = itemsWithLatestDate.filter(
     (item) => item.latestDate.getTime() >= today.getTime()
@@ -100,7 +106,10 @@ export default function ListFilter({ items = [] }) {
           ARKIV
         </button>
       </div>
-      <ListCardDropDown onFilterChange={handleFilterChange} />
+      <ListCardDropDown 
+  onFilterChange={handleFilterChange}
+  categories={dynamicCategories}
+/>
 
 {/* --- Vis valgt kategori som chip --- */}
 {selectedCategory && (
