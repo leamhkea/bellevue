@@ -2,11 +2,11 @@ import Price from "../global/ikoner/Price";
 import Child from "../global/ikoner/Child";
 import Calender from "../global/ikoner/Calender";
 import Clock from "../global/ikoner/Clock";
+import AnchorTagPrimaryButton from "../global/knapper/AnchorTagPrimaryButton";
 
 const StickyInfo = ({item}) => {
     return ( 
         <div className="flex flex-col gap-20 max-w-200 p-10 backdrop-blur-3xl rounded-2xl">
-             <h2>{item.name}</h2>
         <div className="h-full z-10 flex gap-20">
 
             <div className="flex flex-col gap-20">
@@ -36,11 +36,10 @@ const StickyInfo = ({item}) => {
                     <p>{item.alder}</p>
                     </div>
             </div>
-        </div>
 
-        <div>
-            <p>{item.description_short}</p>
         </div>
+        <AnchorTagPrimaryButton href={"/"}>Køb billet</AnchorTagPrimaryButton>
+
         {/* {item.embed ? (
             <iframe title={`trailer af ${item.name}`}
                     src={item.embed}

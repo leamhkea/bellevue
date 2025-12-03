@@ -3,12 +3,9 @@ import Image from "next/image";
 import Link from "next/link";
 import AnchorTagPrimaryButton from "@/components/global/knapper/AnchorTagPrimaryButton";
 
-export default function ListCard({ items }) {
+export default function ListCard({ item }) {
   return (
-    <>
-      {items.map((item) => (
         <li
-          key={item.id}
           className="relative"
         >
           <div className="flex flex-col rounded-2xl cursor-pointer ml-4 mr-4 mt-10 min-h-[450px] max-w-100 backdrop-blur-3xl">
@@ -62,7 +59,5 @@ export default function ListCard({ items }) {
            <div className="absolute top-10 left-2.5 w-98 min-h-[455px] border-l-5 border-b-10 border-(--koboltblaa-900) rounded-3xl -z-10
           bg-[linear-gradient(to_left,var(--hvid)_95%,var(--koboltblaa-900)_5%,var(--koboltblaa-900)_100%)] drop-shadow-2xl"></div>
         </li>
-      ))}
-    </>
   );
 }

@@ -1,12 +1,10 @@
 import BellevueStriber from "@/components/global/animationer/BellevueStriber";
 import Image from "next/image";
 import VandTaarn from "@/components/global/ikoner/VandTaarn";
-import Karrusel from "@/components/global/komponenter/Karrusel";
 import ListCard from "@/components/listview/forestillinger/ListCard";
 import { createClient } from "@supabase/supabase-js";
-import Card from "@/components/landingpage/Card";
-import KarruselSliced from "@/components/global/komponenter/KarruselSliced";
-import SlidingForestillinger from "@/components/landingpage/SlidingForestillinger";
+import Karrusel from "@/components/global/komponenter/Karrusel";
+import { parseDates } from "@/app/utils.js"
 
   // Supabase client (fungerer som server)
   const supabase = createClient(
@@ -24,6 +22,14 @@ export default async function Home() {
   
     console.log("Fetched data:", data);
 
+      // const today = new Date();
+      // today.setHours(0, 0, 0, 0);
+    
+      // // Beregner gyldige dato fra funktion i utils
+      //   const itemsWithLatestDate = useMemo(
+      //     () => parseDates(items, { addLatestDate: true }),
+      //     [items]
+      //   );
     
 
   return (
@@ -53,7 +59,15 @@ export default async function Home() {
         </div>
       </BellevueStriber>
 
-           {/* <SlidingForestillinger data={data} /> */}
+        <section>
+      <ul>
+      {data.map((item)=>(
+
+              <ListCard key={item.id} item={item}/>
+      ))}
+      </ul>
+
+        </section>
 
 
     </div>

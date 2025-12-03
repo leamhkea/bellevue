@@ -2,141 +2,98 @@
 import { useState, useMemo, useEffect } from "react";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
-import { parse } from "date-fns";
 import { da } from "date-fns/locale";
+import { parseDates } from "@/app/utils";
 import AnchorTagPrimaryButton from "../global/knapper/AnchorTagPrimaryButton";
+import { IoIosArrowDropleft, IoIosArrowDropright } from "react-icons/io";
+import { format } from "date-fns";
 
 const DatoOversigt = ({ item }) => {
-  const [selected, setSelected] = useState(null);
+const [selected, setSelected] = useState()
+  // --- kun fremtidige datoer ---
+  const allowedDates = useMemo(
+    () => parseDates(item?.fullDates || [], { onlyFuture: true }),
+    [item]
+  );
 
-  const allowedDates = useMemo(() => {
-    const list = item?.fullDates || [];
-    const seen = new Set();
+  const allowedSet = useMemo(() => new Set(allowedDates.map((d) => d.getTime())), [allowedDates]);
 
-    return list
-      .map((entry) => {
-        const dateStr = entry?.date;
-        if (!dateStr) return null;
-        // sørger for datoen konverteres korrekt
-        const dt = parse(dateStr, "dd/MM/yyyy", new Date(), { locale: da });
-        if (isNaN(dt)) return null;
-        dt.setHours(0, 0, 0, 0); //følger efter tidszonen.
-        return dt;
-      })
-      .filter(Boolean)
-      .filter((d) => {
-        const t = d.getTime();
-        if (seen.has(t)) return false;
-        seen.add(t);
-        return true;
-      });
-  }, [item]);
-
-  //endelig konstant til de gyldige datoer
-  const allowedSet = useMemo(() => {
-    const s = new Set();
-    allowedDates.forEach((d) => s.add(d.getTime()));
-    return s;
-  }, [allowedDates]);
-
-  // --- Bruges til at mappe over datoerne under arrayet ---
+  // map dato -> tidspunkter
   const timesByDate = useMemo(() => {
     const map = new Map();
-    const list = item?.fullDates || [];
-
-    list.forEach((entry) => {
-      const dateStr = entry?.date;
-      if (!dateStr) return;
-      const dt = parse(dateStr, "dd/MM/yyyy", new Date(), { locale: da });
-      if (isNaN(dt)) return;
-      dt.setHours(0, 0, 0, 0);
+    (item?.fullDates || []).forEach((entry) => {
+      if (!entry?.date) return;
+      const dt = parseDates([entry])[0]; // brug utils til parsing
+      if (!dt) return;
       const key = dt.getTime();
 
       let raw = entry?.time;
       let slots = [];
 
       if (Array.isArray(raw)) {
-        // array items kan være strings eller comma-separated strings
         raw.forEach((r) => {
-          if (typeof r === "string") {
-            slots.push(...r.split(",").map((s) => s.trim()));
-          }
+          if (typeof r === "string") slots.push(...r.split(",").map((s) => s.trim()));
         });
       } else if (typeof raw === "string") {
         slots.push(...raw.split(",").map((s) => s.trim()));
       }
 
-      // fjern tomme og dubletter
       slots = Array.from(new Set(slots.filter(Boolean)));
-
       if (slots.length === 0) return;
 
-      if (map.has(key)) {
-        map.set(key, Array.from(new Set([...map.get(key), ...slots])));
-      } else {
-        map.set(key, slots);
-      }
+      map.set(key, map.has(key) ? Array.from(new Set([...map.get(key), ...slots])) : slots);
     });
 
     return map;
   }, [item]);
 
-  //til at styre datoen, brugeren har valgt
   const handleSelect = (date) => {
-    if (!date) {
-      setSelected(null);
-      return;
-    }
+    if (!date) return setSelected(null);
     const d = new Date(date);
     d.setHours(0, 0, 0, 0);
     if (allowedSet.has(d.getTime())) setSelected(d);
   };
 
-    // beregn hvilke måneder der indeholder available dates (første dag i måneden) ---
+  // måneder med available dates
   const availableMonths = useMemo(() => {
     const set = new Set();
-    (allowedDates || []).forEach((d) => {
-      const m = new Date(d.getFullYear(), d.getMonth(), 1);
-      set.add(m.getTime());
-    });
-    return Array.from(set)
-      .map((t) => new Date(t))
-      .sort((a, b) => a.getTime() - b.getTime());
+    allowedDates.forEach((d) => set.add(new Date(d.getFullYear(), d.getMonth(), 1).getTime()));
+    return Array.from(set).map((t) => new Date(t)).sort((a, b) => a.getTime() - b.getTime());
   }, [allowedDates]);
 
-  // styrer hvilken måned DayPicker viser (kun måneder fra availableMonths)
   const [visibleMonth, setVisibleMonth] = useState(
     availableMonths.length ? availableMonths[0] : new Date()
   );
 
-  // når availableMonths opdateres (fx efter item er loadet), sæt visibleMonth til første available hvis ikke allerede gyldig
   useEffect(() => {
     if (availableMonths.length === 0) return;
-    const found = availableMonths.find(
-      (m) => visibleMonth && m.getTime() === visibleMonth.getTime()
-    );
-    if (!found) setVisibleMonth(availableMonths[0]);
-  }, [availableMonths]); // eslint-disable-line react-hooks/exhaustive-deps
+    if (!availableMonths.find((m) => m.getTime() === visibleMonth.getTime())) {
+      setVisibleMonth(availableMonths[0]);
+    }
+  }, [availableMonths]);
 
-  // helpers til at finde prev/next available måned
-  const findIndex = (date) =>
-    availableMonths.findIndex((m) => m.getTime() === date?.getTime());
+  const findIndex = (date) => availableMonths.findIndex((m) => m.getTime() === date?.getTime());
   const getPrevMonth = (date) => {
     const i = findIndex(date);
     return i > 0 ? availableMonths[i - 1] : null;
   };
   const getNextMonth = (date) => {
     const i = findIndex(date);
-    return i >= 0 && i < availableMonths.length - 1
-      ? availableMonths[i + 1]
-      : null;
+    return i >= 0 && i < availableMonths.length - 1 ? availableMonths[i + 1] : null;
   };
 
-    const CustomNavbar = ({ className, style }) => {
+  // vælger automatisk første ledige dato
+useEffect(() => {
+  if (allowedDates.length === 0) return;
+  setSelected(allowedDates[0]);
+}, [allowedDates]);
+
+
+  const CustomNavbar = ({ className, style }) => {
     const prev = getPrevMonth(visibleMonth);
     const next = getNextMonth(visibleMonth);
 
-        return (
+    return (
       <div className={className} style={style}>
         <button
           type="button"
@@ -171,63 +128,34 @@ const DatoOversigt = ({ item }) => {
         mode="single"
         selected={selected}
         onSelect={handleSelect}
-        // dansk tidszone
         locale={da}
-        //fjerner klik på datoer, der ikke er gyldige
-        disabled={(date) => {
-          if (!date) return true;
-          const d = new Date(date);
-          d.setHours(0, 0, 0, 0);
-          return !allowedSet.has(d.getTime());
-        }}
-         month={visibleMonth}
+        disabled={(date) => !date || !allowedSet.has(new Date(date).setHours(0, 0, 0, 0))}
+        month={visibleMonth}
         onMonthChange={(m) => {
-          // hvis nogen forsøger at ændre måned (fx keyboard), skift til nærmeste available måned
           const same = availableMonths.find((am) => am.getTime() === m.getTime());
-          if (same) setVisibleMonth(same);
-          else {
-            // find nærmeste available måned (første større eller sidste mindre)
-            const next = availableMonths.find((am) => am.getTime() >= m.getTime());
-            setVisibleMonth(next || availableMonths[availableMonths.length - 1]);
-          }
+          setVisibleMonth(same || availableMonths.find((am) => am.getTime() >= m.getTime()) || availableMonths[availableMonths.length - 1]);
         }}
-        //modifiers = gyldige datoer fra api'et
         modifiers={{ available: allowedDates }}
         modifiersStyles={{ available: { color: "#1c82c2", borderRadius: "100%" } }}
         styles={{
-          day_selected: {
-            backgroundColor: "#1c82c2", // farve på den valgte cirkel
-            borderRadius: "9999px",
-          },
-          day_selected_hover: {
-            backgroundColor: "#166699",
-          },
-          nav_button: {
-            color: "#1c82c2", // sætter tekst/fill via currentColor på pilene
-          },
+          day_selected: { backgroundColor: "#1c82c2", borderRadius: "9999px" },
+          day_selected_hover: { backgroundColor: "#166699" },
+          nav_button: { color: "#1c82c2" },
         }}
-         components={{
-          Navbar: CustomNavbar,
-        }}
+        components={{ Navbar: CustomNavbar }}
       />
 
- {/* vis tidspunkter for valgte dato, ellers returner "vælg en dato"*/}
       <div className="flex flex-col gap-5 min-w-50">
-        <h2>Tidspunkter</h2>
+        <h3>Book billetter</h3>
         <div className="flex">
           {selected ? (
-            (() => {
-              const times = timesByDate.get(selected.getTime()) || [];
-              return (
-                <ul className="flex flex-col gap-10">
-                  {times.map((time) => (
-                    <li key={time}>
-                      <AnchorTagPrimaryButton href={"/"}>{time}</AnchorTagPrimaryButton>
-                    </li>
-                  ))}
-                </ul>
-              );
-            })()
+            <ul className="flex flex-col gap-10">
+              {(timesByDate.get(selected.getTime()) || []).map((time) => (
+                <li key={time}>
+                  <AnchorTagPrimaryButton href={"/"}>{time}</AnchorTagPrimaryButton>
+                </li>
+              ))}
+            </ul>
           ) : (
             <span>Vælg en dato</span>
           )}
@@ -236,4 +164,5 @@ const DatoOversigt = ({ item }) => {
     </div>
   );
 };
+
 export default DatoOversigt;

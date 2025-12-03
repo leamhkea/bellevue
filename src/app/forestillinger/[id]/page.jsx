@@ -1,3 +1,4 @@
+import BellevueStriber from "@/components/global/animationer/BellevueStriber";
 import SingleCard from "@/components/singleview/SingleCard";
 import { createClient } from "@supabase/supabase-js";
 
@@ -26,8 +27,8 @@ export default async function SingleItem({ params }) {
   }
 
   return (
-    <section className="pt-40">
+    <div>
       <SingleCard item={data} />
-    </section>
+    </div>
   );
 }

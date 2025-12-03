@@ -1,8 +1,11 @@
 "use client";
-import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { useState, useEffect, useRef } from "react";
+import { motion, useInView } from "framer-motion";
 
 const BellevueStriber = ({ children }) => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
+
   const stripeWidth = 40;
   const [numberOfStripes, setNumberOfStripes] = useState(0);
 
@@ -18,14 +21,17 @@ const BellevueStriber = ({ children }) => {
   }, []);
 
   return (
-    <div className="h-full overflow-hidden relative -z-110 pointer-events-auto">
+    <div
+      ref={ref}
+      className="h-full overflow-hidden relative -z-110 pointer-events-auto"
+    >
       {Array.from({ length: numberOfStripes }).map((_, i) => (
         <motion.div
           key={i}
           className="w-10 h-full bg-(--bellevueblaa-100) absolute top-0 -z-100"
           style={{ left: `${i * 5.5}rem` }}
-          initial={{ y: -300, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
+          initial={{ y: -300, opacity: 0 }} 
+          animate={isInView ? { y: 0, opacity: 1 } : undefined} 
           transition={{ duration: 0.5, delay: i * 0.1, ease: "easeOut" }}
         />
       ))}

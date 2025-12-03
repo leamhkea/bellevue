@@ -18,9 +18,9 @@ const AddOns = ({addOn}) => {
                     <li key={item.text}>
                     <div className="flex gap-10 justify-between items-center">
                         <p className="max-w-80">{item.text}</p>
-                        <div className="flex flex-col items-center text-center">
+                        <div className="flex flex-col items-end">
                         <h4 className="font-thin">{item.secondaryheading}</h4>
-                        <h4 className="flex flex-end items-center">{item.heading}</h4>
+                        <h4 className="flex flex-end items-end">{item.heading}</h4>
                         </div>
                     </div>
                     </li>
