@@ -135,3 +135,4 @@ const dynamicCategories = useMemo(() => {
     </div>
   );
 }
+ 

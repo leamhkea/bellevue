@@ -4,3 +4,4 @@ import ListServer from "@/components/listview/forestillinger/ListServer";
 export default function Forestillinger() {
   return <ListServer />;
 }
+ 
