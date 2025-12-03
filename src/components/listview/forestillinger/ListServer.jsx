@@ -11,7 +11,7 @@ const supabase = createClient(
 
 export default async function ListServer() {
   // Hent data fra Supabase med navn på tabel
-  const { data, error } = await supabase.from("bellevue_items").select("*");
+  const { data, error } = await supabase.from("bellevue_employees").select("*");
 
   // Error besked hvis fejl i fetch
   if (error) {
@@ -27,4 +27,4 @@ export default async function ListServer() {
       <ListFilter items={data || []} />
     </div>
   );
-}
+} 
