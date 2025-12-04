@@ -11,29 +11,34 @@ const RundvisningInfo = () => {
     // <BellevueStriber>
     <div className="flex flex-col gap-20">
       {/* =============================== TEXT + VIDEO ================================ */}
-      <div className="px-(--content-width) w-full pt-20 grid gap-8">
+      <div className="pt-20 grid gap-15">
         <h2>Rundvisning</h2>
 
         <div className="grid grid-cols-2">
           {/* ========= VENSTRE INDHOLD ======== */}
-          <div>
+
+          <div className="flex flex-col gap-18">
             {/* CONTAINER FOR IKONER */}
-            <div className="text-(--roed-600)">
-              <div className="flex gap-4">
-                <Clock size={30} />
-                <p>45 minutters varighed</p>
+            <div className="flex flex-col gap-6">
+              <div className="flex gap-4 items-center">
+                <Clock size={30} className={"text-(--moerkblaa-300)"} />
+                <p className="highlighttext">45 minutters varighed</p>
               </div>
-              <div className="flex gap-4">
-                <Chat size={25} />
-                <p>Tilbydes på dansk eller engelsk</p>
+              <div className="flex gap-4 items-center">
+                <Chat size={25} className={"text-(--moerkblaa-300)"} />
+                <p className="highlighttext">Tilbydes på dansk eller engelsk</p>
               </div>
-              <div className="flex gap-4">
-                <Calender size={25} />
-                <p>Arrangeres på hverdage mellem 9-16</p>
+              <div className="flex gap-4 items-center">
+                <Calender size={25} className={"text-(--moerkblaa-300)"} />
+                <p className="highlighttext">
+                  Arrangeres på hverdage mellem 9-16
+                </p>
               </div>
-              <div className="flex gap-4">
-                <Price size={25} />
-                <p>135 kr. per person (min. 10 pers)</p>
+              <div className="flex gap-4 items-center">
+                <Price size={25} className={"text-(--moerkblaa-300)"} />
+                <p className="highlighttext">
+                  135 kr. per person (min. 10 pers)
+                </p>
               </div>
             </div>
 
@@ -56,7 +61,7 @@ const RundvisningInfo = () => {
                 Arne Jacobsens ikoniske teater fra 1936 ligger elegant på
                 Strandvejen i Klampenborg ved Dyrehavens sydøstlige hjørne og
                 med smuk udsigt til Øresund og sandstrand med moler og
-                udkigstårne. Alt i området er designet af Arne Jacobsen – også
+                udkigstårne. Alt i området er designet af Arne Jacobsen - også
                 den smukke boligrække Bellevista, der støder til Bellevue
                 Teatret mod syd.
               </p>

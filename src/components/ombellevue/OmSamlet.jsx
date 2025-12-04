@@ -1,12 +1,14 @@
 import Intro from "./Intro";
 import RundvisningInfo from "./RundvisningInfo";
+import BilledeSektion from "./BilledeSektion";
 
 const OmSamlet = () => {
   return (
-    <div className="flex flex-col gap-30">
+    <section className="flex flex-col gap-30 mb-30">
       <Intro />
       <RundvisningInfo />
-    </div>
+      <BilledeSektion />
+    </section>
   );
 };
 
