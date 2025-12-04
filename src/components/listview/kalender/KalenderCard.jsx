@@ -54,7 +54,8 @@ const KalenderCard = ({ item, time }) => {
               </div>
             </div>
 
-            <h3>{item.name}</h3>
+            {/* FORESTILLING NAVN */}
+            <h4>{item.name}</h4>
           </div>
 
           {/* KNAPPEN */}
