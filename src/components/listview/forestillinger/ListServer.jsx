@@ -18,7 +18,7 @@ export default async function ListServer() {
 
   return (
     <section>
-      <ListFilter items={data || []} />
+      <SlidingForestillinger items={data || []} />
     </section>
   );
 } 
