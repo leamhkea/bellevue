@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const BilledeSektion = () => {
   return (
-    <div className="flex flex-col gap-8">
+    <section className="flex flex-col gap-8">
       {/* =============================== STORST BILLEDE ================================ */}
       <Image
         src="/images/ombellevue1.webp"
@@ -36,7 +36,7 @@ const BilledeSektion = () => {
           className="rounded-xl w-full h-auto"
         />
       </div>
-    </div>
+    </section>
   );
 };
 
