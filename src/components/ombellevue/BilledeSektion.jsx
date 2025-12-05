@@ -5,7 +5,7 @@ const BilledeSektion = () => {
     <div className="flex flex-col gap-8">
       {/* =============================== STORST BILLEDE ================================ */}
       <Image
-        src="/images/ombellevue1.png"
+        src="/images/ombellevue1.webp"
         alt=""
         width={2000}
         height={1200}
@@ -15,21 +15,21 @@ const BilledeSektion = () => {
       {/* ============================== TRE BILLEDE GRID =============================== */}
       <div className="grid grid-cols-3 gap-8">
         <Image
-          src="/images/ombellevue2.png"
+          src="/images/ombellevue2.webp"
           alt=""
           width={800}
           height={600}
           className="rounded-xl w-full h-auto"
         />
         <Image
-          src="/images/ombellevue3.png"
+          src="/images/ombellevue3.webp"
           alt=""
           width={800}
           height={600}
           className="rounded-xl w-full h-auto"
         />
         <Image
-          src="/images/ombellevue4.png"
+          src="/images/ombellevue4.webp"
           alt=""
           width={800}
           height={600}
