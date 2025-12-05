@@ -9,7 +9,7 @@ import Price from "../global/ikoner/Price";
 const RundvisningInfo = () => {
   return (
     // <BellevueStriber>
-    <div className="flex flex-col gap-20">
+    <section className="flex flex-col gap-20">
       {/* =============================== TEXT + VIDEO ================================ */}
       <div className="pt-20 grid gap-15">
         <h2>Rundvisning</h2>
@@ -76,8 +76,8 @@ const RundvisningInfo = () => {
 
       {/* =============================== BEIGE CONTAINER ================================ */}
       <div className="flex justify-center items-center text-center">
-        <div className="max-w-4xl p-20 bg-(--beige-100) rounded-2xl border-2 border-(--beige-300)">
-          <p className="mb-10">
+        <div className="max-w-3xl p-20 bg-(--beige-100) rounded-2xl border-2 border-(--beige-300)">
+          <p className="pb-10">
             Din rundvisning kan suppleres med smørrebrød eller kaffe og kage i
             teatrets bar. Spørg til mulighederne ved forudbestilling.
           </p>
@@ -87,7 +87,7 @@ const RundvisningInfo = () => {
           </AnchorTagPrimaryButton>
         </div>
       </div>
-    </div>
+    </section>
     // </BellevueStriber>
   );
 };
