@@ -3,7 +3,7 @@ import AnchorTagPrimaryButton from "../global/knapper/AnchorTagPrimaryButton";
 
 const InteraktivtKort = () => {
   return (
-    <div className="flex flex-col gap-30">
+    <div className="flex flex-col gap-10">
       {/* =========================== WRAPPER BLÅ CONTAINER ============================ */}
       <div className="bg-(--moerkblaa-600) py-20">
         <section className="flex flex-col gap-8 items-center">
