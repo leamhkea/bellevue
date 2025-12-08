@@ -32,12 +32,25 @@ const ResponsiveKarrusel = ({ children, interval = 5000 }) => {
     return () => window.removeEventListener("resize", updateCardsPerSlide);
   }, []);
 
-  // Lav slides
-  useEffect(() => {
-    const array = Children.toArray(children); // flyt herind
-    setSlides(chunk(array, cardsPerSlide));
-    setCurrent(0);
-  }, [children, cardsPerSlide]); // kun children og cardsPerSlide
+// Lav slides
+useEffect(() => {
+  const array = Children.toArray(children);
+
+  const rawSlides = chunk(array, cardsPerSlide);
+
+  // Fyld slides op med white-space hvis de mangler kort
+  const filled = rawSlides.map(group => {
+    const missing = cardsPerSlide - group.length;
+    if (missing > 0) {
+      return [...group, ...Array(missing).fill(null)];
+    }
+    return group;
+  });
+
+  setSlides(filled);
+  setCurrent(0);
+}, [children, cardsPerSlide]);
+
 
   // Start auto-slide
   const startAutoSlide = () => {
@@ -94,10 +107,16 @@ const ResponsiveKarrusel = ({ children, interval = 5000 }) => {
               className="flex gap-3 justify-center pl-20 pb-20 pr-20 shrink-0"
               style={{ width: `${100 / slides.length}%` }}
             >
-              {group.map((child, idx) => (
-                <div key={idx} className="flex-1 min-w-0 px-5">
-                  {child}
-                </div>
+             {group.map((child, idx) => (
+            <div
+              key={idx}
+              className="flex-1 min-w-0 px-5"
+              style={{ minHeight: "100%" }}
+            >
+              {child || <div className="opacity-0">placeholder</div>}
+            </div>
+
+
               ))}
             </div>
           ))}
