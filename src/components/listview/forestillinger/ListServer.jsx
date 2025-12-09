@@ -1,4 +1,5 @@
 import { createClient } from "@supabase/supabase-js";
+import { Suspense } from "react";
 import ListFilterClient from "./ListFilterClient";
 
 // Supabase client (fungerer som server)
@@ -16,8 +17,10 @@ export default async function ListServer() {
   console.log("Fetched data:", data);
 
   return (
-    <section>
-      <ListFilterClient items={data || []} />
+     <section>
+      <Suspense fallback={<p>Loading...</p>}>
+        <ListFilterClient items={data || []} />
+      </Suspense>
     </section>
   );
 }
