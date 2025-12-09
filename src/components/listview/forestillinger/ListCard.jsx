@@ -51,7 +51,7 @@ export default function ListCard({ item }) {
               </AnchorTagPrimaryButton>
             </div>
             <div>
-              <AnchorTagSecondaryButton href={`/forestillinger/${item.id}`}/>
+              <AnchorTagSecondaryButton href={`/forestillinger/${item.id}`}>Læs Mere</AnchorTagSecondaryButton>
             </div>
           </div>
         </div>

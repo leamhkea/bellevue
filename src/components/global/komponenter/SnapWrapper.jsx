@@ -7,16 +7,43 @@ import Karrusel from "./Karrusel";
 export default function SnapWrapper({ image, children }) {
   const containerRef = useRef(null);
 
-  const count = Children.count(children);
+  // Filtrer så vi kun får faktiske DOM-elementer
+  const validChildren = Children.toArray(children).filter(
+    (child) => child !== null && child !== undefined && child !== false
+  );
 
-  // Global parallax
+  const count = validChildren.length;
+  const hasReviews = count > 0;
+
+  // --- PARALLAX ONLY (ingen anmeldelser) ---
+  if (!hasReviews) {
+    const { scrollYProgress: pageScroll } = useScroll();
+    const y = useTransform(pageScroll, [0, 1], [0, 1000]);
+
+    return (
+      <div className="relative h-[90vh] w-screen overflow-hidden">
+        <motion.div style={{ y }} className="absolute inset-0 z-0">
+          {image && (
+            <Image
+              src={image.url}
+              alt={image.alt || ""}
+              fill
+              className="object-cover"
+            />
+          )}
+        </motion.div>
+      </div>
+    );
+  }
+
+  // --- NORMAL VERSION MED SNAP / OVERLAY ---
   const { scrollYProgress: pageScroll } = useScroll();
   const y = useTransform(pageScroll, [0, 1], [0, 1000]);
 
-  // Overlay scroll
   const { scrollYProgress: containerScroll } = useScroll({
     container: containerRef,
   });
+
   const overlayOpacity = useTransform(containerScroll, [0, 0.2], [0, 0.7]);
 
   return (
@@ -48,9 +75,8 @@ export default function SnapWrapper({ image, children }) {
       >
         <div className="h-[90vh] snap-start" />
 
-        {/* Sektion med indhold, viser kun karrusel hvis længden er over én */}
-        <div className={`h-[90vh] text-(--hvid) ${count > 1 ? "snap-start" : ""}`}>
-          {count > 1 ? <Karrusel>{children}</Karrusel> : children} 
+        <div className={`h-[90vh] ${count > 1 ? "snap-start" : ""} text-(--hvid)`}>
+          {count > 1 ? <Karrusel>{validChildren}</Karrusel> : validChildren}
         </div>
       </div>
     </div>

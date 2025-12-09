@@ -7,7 +7,9 @@ import ListCardDropDown from "./ListCardDropDown";
 import WipeLineAnimation from "@/components/global/animationer/WipeLineAnimarion";
 import { extractCategories } from "@/app/library/utils.js";
 
-export default function ListFilter({ items }) {
+
+
+export default async function ListFilter({ items }) {
   const searchParams = useSearchParams();
   const initialCategory = searchParams.get("category"); //denne del modtager searchparams fra forsidens kategorifiltrering
   const [activeTab, setActiveTab] = useState("current");
