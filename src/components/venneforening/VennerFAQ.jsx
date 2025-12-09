@@ -20,45 +20,45 @@ const QACard = () => {
       id: 1,
       question: "Hvordan booker jeg billetter?",
       answer:
-        "Du kan købe billetter direkte på vores hjemmeside eller via Ticketmaster. Følg vejledningen på siden.",
+        "Du kan købe billetter direkte på vores hjemmeside eller via Ticketmaster.dk - Følg vejledningen på siden.",
     },
     {
       id: 2,
       question: "Kan jeg selv vælge, hvor jeg vil sidde??",
       answer:
-        "Billetter kan normalt ikke refunderes, medmindre arrangementet aflyses. Kontakt administration for mere info.",
+        "Ja — du kan selv vælge dine pladser, når du køber billetter, så længe de stadig er ledige.",
     },
     {
       id: 3,
       question:
         "Hvad gør vi, hvis vi er flere medlemmer, der gerne vil sidde ved siden af hinanden?",
       answer:
-        "Ja, der er gratis parkering ved teatret. Vi anbefaler dog at komme i god tid ved store forestillinger.",
+        "Ja — bestil billetter samlet, så sørger vi for, at I sidder sammen. Hvis I allerede har købt hver for sig, kan kundeservice ofte hjælpe.",
     },
     {
       id: 4,
-      question: "Kan der resikeres at være udsolgt, til et event?",
+      question: "Kan der risikeres at være udsolgt, til et event?",
       answer:
-        "Ja, der er gratis parkering ved teatret. Vi anbefaler dog at komme i god tid ved store forestillinger.",
+        "Ja — det kan risikeres, at forestillingen bliver udsolgt. Vi anbefaler derfor, at du køber billetter i god tid for at sikre din plads.",
     },
     {
       id: 5,
       question: "Hvad gør jeg, hvis jeg køber flere billetter?",
       answer:
-        "Ja, der er gratis parkering ved teatret. Vi anbefaler dog at komme i god tid ved store forestillinger.",
+        "Hvis du køber flere billetter, bliver de samlet under den samme mailadresse, og I bliver placeret sammen automatisk.",
     },
     {
       id: 6,
       question: "Hvad hvis jeg har brug for handicapplads?",
       answer:
-        "Ja, der er gratis parkering ved teatret. Vi anbefaler dog at komme i god tid ved store forestillinger.",
+        "Hvis du har brug for en handicapplads, er der særlige områder reserveret til dette. Du kan se alle tilgængelige handicappladser direkte i salsoversigten på Ticketmaster, når du vælger dine billetter.",
     },
     {
       id: 7,
       question:
         "Hvad gør jeg, hvis jeg ikke modtager den første mail efter jeg har indmeldt mig?",
       answer:
-        "Ja, der er gratis parkering ved teatret. Vi anbefaler dog at komme i god tid ved store forestillinger.",
+        "Hvis du ikke modtager velkomstmailen, så tjek spam, vent et øjeblik, og kontakt kundeservice, hvis den stadig ikke dukker op.",
     },
   ];
 
