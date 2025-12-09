@@ -1,3 +1,6 @@
+import Image from "next/image";
+
+
 const KontaktHero = () => (
   <div>
     {/* HERO SEKTION */}
@@ -23,6 +26,9 @@ const KontaktHero = () => (
     </div>
 
     {/* GUL KONTAKT-INFO SEKTION (udenfor max-height!) */}
+    <div className="absolute -left-10">
+        <Image src="/svg/phone.svg" alt="" width={350} height={350} />
+      </div>
     <div className="bg-(--gul-600)">
       <section className="grid grid-cols-1 sm:grid-cols-3 gap-8 mt-10 pt-10 pb-10 px-4 sm:px-10 md:px-20 text-center">
       <div>
@@ -54,3 +60,5 @@ const KontaktHero = () => (
 );
 
 export default KontaktHero;
+
+
