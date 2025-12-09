@@ -1,11 +1,18 @@
 "use client";
-import { motion } from "framer-motion";
 import ListCard from "../listview/forestillinger/ListCard";
 import { parseDates } from "@/app/library/utils";
 import { useMemo } from "react";
 import ResponsiveKarrusel from "../global/komponenter/ResponsiveKarrusel";
 
+const chunk = (arr, size) => {
+  return arr.reduce((acc, _, i) => {
+    if (i % size === 0) acc.push(arr.slice(i, i + size));
+    return acc;
+  }, []);
+};
+
 const VennerKarrusel = ({ data }) => {
+
   const now = new Date();
 
   const itemsWithLatestDate = useMemo(
@@ -19,22 +26,17 @@ const VennerKarrusel = ({ data }) => {
 
   return (
     <>
-                <div className="pl-25">
-      <h2>Aktuelle forestillinger</h2>
-      <a href="/forestillinger">
-      <h4 className="underline thin">
-      Se alle forestillinger
-      </h4>
-      </a>
-      </div>
-      <ResponsiveKarrusel>
-        {upcoming.map((item) => (
-          <ListCard key={item.id} item={item} />
-        ))}
-      </ResponsiveKarrusel>
+        <div className="pl-25">
+          <h2>Aktuelle medlemsfordele</h2>
+        </div>
+        <ResponsiveKarrusel>
+          {upcoming.map((item) => (
+            <ListCard key={item.id} item={item} />
+          ))}
+        </ResponsiveKarrusel>
     </>
   );
 };
 
-
 export default VennerKarrusel;
+

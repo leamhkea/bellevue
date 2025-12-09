@@ -80,7 +80,7 @@ const QACard = () => {
               onClick={() => toggle(item.id)}
             >
               <h3 className="text-lg ">{item.question}</h3>
-              <span className="text-3xl font-bold cursor-pointer select-none">
+              <span className="text-3xl font-bold cursor-pointer select-none  text-(--roed-600)">
                 {isOpen ? "−" : "+"}
               </span>
             </div>
