@@ -1,5 +1,5 @@
-import ListFilter from "./ListFilter";
 import { createClient } from "@supabase/supabase-js";
+import ListFilterClient from "./ListFilterClient";
 
 // Supabase client (fungerer som server)
 const supabase = createClient(
@@ -17,7 +17,7 @@ export default async function ListServer() {
 
   return (
     <section>
-      <ListFilter items={data || []} />
+      <ListFilterClient items={data || []} />
     </section>
   );
 }

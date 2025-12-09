@@ -1,17 +1,16 @@
 "use client";
-import { useMemo, useState, useRef, useEffect } from "react";
+
 import { useSearchParams } from "next/navigation";
-import { parseDates } from "@/app/library/utils.js";
+import { useState, useEffect, useMemo, useRef } from "react";
 import ListCard from "./ListCard";
 import ListCardDropDown from "./ListCardDropDown";
+import { parseDates, extractCategories } from "@/app/library/utils";
 import WipeLineAnimation from "@/components/global/animationer/WipeLineAnimarion";
-import { extractCategories } from "@/app/library/utils.js";
 
-
-
-export default async function ListFilter({ items }) {
+export default function ListFilterClient({ items }) {
   const searchParams = useSearchParams();
-  const initialCategory = searchParams.get("category"); //denne del modtager searchparams fra forsidens kategorifiltrering
+  const initialCategory = searchParams.get("category");
+
   const [activeTab, setActiveTab] = useState("current");
   const [selectedCategory, setSelectedCategory] = useState(initialCategory);
 
@@ -26,38 +25,31 @@ export default async function ListFilter({ items }) {
     });
   }, [activeTab]);
 
-  //UI opdaterer kategorien hvis den er sendt videre
   useEffect(() => {
     setSelectedCategory(initialCategory);
   }, [initialCategory]);
 
-  // Behold hele datoen + tidspunktet
   const now = new Date();
-
-  // Beregn latestDate for hvert item (inkl. tidspunkt)
   const itemsWithLatestDate = useMemo(
     () => parseDates(items, { addLatestDate: true }),
     [items]
   );
 
-  // Upcoming (dato + tidspunkt i fremtiden)
   const upcoming = itemsWithLatestDate.filter(
     (item) => item.latestDate.getTime() >= now.getTime()
   );
 
-  // Archive (dato + tidspunkt i fortiden)
   const archive = itemsWithLatestDate.filter(
     (item) => item.latestDate.getTime() < now.getTime()
   );
 
   let visibleItems = activeTab === "current" ? upcoming : archive;
-  // Uddrag dynamiske kategorier fra utils - viser kun kategorier for forestillinger, der er aktive
+
   const categoriesForActiveTab = useMemo(() => {
     const base = activeTab === "current" ? upcoming : archive;
     return extractCategories(base);
   }, [activeTab, upcoming, archive]);
 
-  // Filtrering på tags
   if (selectedCategory) {
     visibleItems = visibleItems.filter((item) =>
       item.tags?.includes(selectedCategory)
@@ -72,15 +64,13 @@ export default async function ListFilter({ items }) {
 
   return (
     <div className="pt-40">
-      {/* TABS */}
+      {/* Tabs */}
       <div className="flex gap-6 mb-6 pb-3 relative w-full">
         <button onClick={() => setActiveTab("current")}>
           <h1
             ref={currentRef}
             className={`${
-              activeTab === "current"
-                ? "text-(--moerkeblaa-900)"
-                : "bellevueblaa-100"
+              activeTab === "current" ? "text-(--moerkeblaa-900)" : "bellevueblaa-100"
             }`}
           >
             FORESTILLINGER
@@ -91,9 +81,7 @@ export default async function ListFilter({ items }) {
           <h1
             ref={archiveRef}
             className={`${
-              activeTab === "archive"
-                ? "text-(--moerkeblaa-900)"
-                : "bellevueblaa-100"
+              activeTab === "archive" ? "text-(--moerkeblaa-900)" : "bellevueblaa-100"
             }`}
           >
             ARKIV
@@ -125,10 +113,7 @@ export default async function ListFilter({ items }) {
 
       <ul className="flex flex-wrap gap-3 mt-4">
         {visibleItems.map((item) => (
-          <div
-            key={item.id}
-            className="basis-[calc(33.333%-0.5rem)]" // tilpas gap
-          >
+          <div key={item.id} className="basis-[calc(33.333%-0.5rem)]">
             <ListCard item={item} />
           </div>
         ))}
