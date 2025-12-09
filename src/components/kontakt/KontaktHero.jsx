@@ -16,17 +16,18 @@ const KontaktHero = () => (
           stillinger.
         </p>
 
-        <p className="font-bold pt-5">
+        <p className="font-medium pt-5">
           Tøv endelig ikke med at række ud – vi glæder os til at høre fra dig.
         </p>
       </div>
     </div>
 
     {/* GUL KONTAKT-INFO SEKTION (udenfor max-height!) */}
-    <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 mt-10 pt-10 pb-10 bg-(--gul-600) px-4 sm:px-10 md:px-20 text-center">
+    <div className="bg-(--gul-600)">
+      <section className="grid grid-cols-1 sm:grid-cols-3 gap-8 mt-10 pt-10 pb-10 px-4 sm:px-10 md:px-20 text-center">
       <div>
-        <p className="text-xl sm:text-2xl font-bold">Administration</p>
-        <div className="font-light pt-5">
+        <h3 className="text-xl sm:text-2xl font-bold" class="" >Administration</h3>
+        <div className="font-extralight pt-5">
           <p>39 63 49 00</p>
           <p>(hverdage 10 - 14)</p>
           <p>adm@bellevueteatret.dk</p>
@@ -34,18 +35,20 @@ const KontaktHero = () => (
       </div>
 
       <div>
-        <p className="text-xl sm:text-2xl font-bold">Billetkontor</p>
-        <div className="font-light pt-5"></div>
+        <h3 className="text-xl sm:text-2xl font-bold" class="">Billetkontor</h3>
+        <div className="font-extralight pt-5">
         <p>Ticketmaster: 38 48 16 30</p>
         <p>(hverdage 10 - 16.30)</p>
+        </div>
       </div>
 
       <div>
-        <p className="text-xl sm:text-2xl font-bold">Forhus</p>
-        <div className="font-light pt-5">
+        <h3 className="text-xl sm:text-2xl font-bold" class="">Forhus</h3>
+        <div className="font-extralight  pt-5">
           <p>Forhus@bellevueteatret.dk</p>
         </div>
       </div>
+      </section>
     </div>
   </div>
 );

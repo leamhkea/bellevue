@@ -7,13 +7,13 @@ export default function KontaktFilter({ employees = [] }) {
   return (
     <div>
       {/* <KontaktHero /> */}
-      <div className=" bg-(--beige-100)">
-        <h1 className="text-center pt-5">Teatrets Medarbejdere</h1>
+      <section className=" bg-(--beige-100)">
+        <h2 className="text-center pt-20">Teatrets Medarbejdere</h2>
 
-        <ul className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 pr-20">
+        <ul className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 pr-20 pb-20">
           <KontaktMedarbejder employees={employees} />
         </ul>
-      </div>
+      </section>
       {/* <Nyhedsbrev /> */}
     </div>
   );

@@ -1,7 +1,7 @@
 const Nyhedsbrev = () => (
   <div>
     <div className="text-center text-(--beige-100) bg-(--moerkblaa-600)">
-  <p className="text-5xl pb-7 font-bold pt-15">Ledige Stillinger</p>
+  <h3 className="pb-7 font-light pt-15 beige-100">Ledige Stillinger</h3>
 
   {/* <!-- Responsiv container --> */}
   <div className="font-extralight mx-auto px-4 max-w-2xl">
@@ -14,7 +14,7 @@ const Nyhedsbrev = () => (
     <p>Forhus: forhus@bellevueteatret.dk</p>
   </div>
 
-  <p className="font-bold pb-15 pt-5">Vi glæder os til at høre fra dig.</p>
+  <p className="font-medium pb-15 pt-5">Vi glæder os til at høre fra dig.</p>
 </div>
 
 
