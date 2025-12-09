@@ -22,9 +22,5 @@ export default async function ListServer() {
   console.log("Fetched data:", data);
 
   // Returnerer data ellers tomt array
-  return (
-    <ul>
-      <KalenderSamlet items={data || []} />
-    </ul>
-  );
+  return <KalenderSamlet items={data || []} />;
 }

@@ -17,7 +17,9 @@ const AnchorTagSecondaryButton = ({ href }) => {
       onFocus={() => setHovered(true)}
       onBlur={() => setHovered(false)}
     >
-      <p className="hover:scale-102 transition-all duration-300 font-light">Læs mere</p>
+      <p className="hover:scale-102 transition-all duration-300 font-light">
+        Læs mere
+      </p>
 
       <div className="w-[26px] h-[26px] flex items-center justify-center overflow-hidden">
         <motion.div

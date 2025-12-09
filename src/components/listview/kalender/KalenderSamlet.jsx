@@ -1,7 +1,8 @@
 "use client";
 import { useMemo, useState } from "react";
 import KalenderCard from "./KalenderCard";
-import { groupShowsByDate } from "@/app/library/utils.js";
+import KalenderDropdown from "./KalenderDropdown";
+import { groupShowsByDate, extractCategories } from "@/app/library/utils.js";
 
 // ======================================= KALENDER-KOMPONENT ============================================
 const KalenderSamlet = ({ items }) => {
@@ -21,8 +22,10 @@ const KalenderSamlet = ({ items }) => {
 
   // ====================================== DROPDOWN-FILTRERING ==========================================
 
-  // State til valgt dato i dropdown ("all" = vis alle)
+  // State til valgt dato, kategori og børn ("all" = vis alle)
   const [selectedDate, setSelectedDate] = useState("all");
+  const [selectedCategory, setSelectedCategory] = useState("all");
+  const [selectedChildren, setSelectedChildren] = useState("all");
 
   // Funktion til formattering af datoer (bruges i dropdown og overskrifter)
   const formatDate = (date) =>
@@ -37,41 +40,72 @@ const KalenderSamlet = ({ items }) => {
       .replace(" den ", " d. ") // ændrer "den" til "d."
       .replace(/^\w/, (c) => c.toUpperCase()); // stort begyndelsesbogstav
 
+  // Datoer til dropdown (vises som formatteret tekst)
+  const dateOptions = useMemo(
+    () => grouped.map(({ date }) => formatDate(date)),
+    [grouped]
+  );
+
+  // Kategorier til dropdown (tags fra items)
+  const categories = useMemo(() => extractCategories(items), [items]);
+
+  // Børn/voksne-tilstand (baseret på tags på items)
+  const childrenOptions = ["Familieforestilling", "For børn"];
+
+  // Håndtering af ændring fra dropdowns
+  const handleFilterChange = (type, value) => {
+    if (type === "date") {
+      setSelectedDate(value === "Alle" ? "all" : value);
+    }
+    if (type === "category") {
+      setSelectedCategory(value === "Alle" ? "all" : value);
+    }
+    if (type === "children") {
+      setSelectedChildren(value === "Alle" ? "all" : value);
+    }
+  };
+
   // Hvis "all" er valgt -> vis alle datoer, ellers filtrér på valgt dato
-  const filteredGrouped =
-    selectedDate === "all"
-      ? grouped
-      : grouped.filter(
-          (g) => g.date.toISOString().split("T")[0] === selectedDate
-        );
+  // + filtrér på kategori/børn ud fra tags på forestillingerne
+  const filteredGrouped = grouped
+    .map(({ date, shows }) => {
+      // Filtrér på dato på gruppeniveau
+      if (selectedDate !== "all" && formatDate(date) !== selectedDate) {
+        return { date, shows: [] };
+      }
+
+      // Filtrér på kategori + børn på showniveau
+      const filteredShows = shows.filter(({ item }) => {
+        const tags = item.tags || [];
+
+        const matchCategory =
+          selectedCategory === "all" || tags.includes(selectedCategory);
+
+        const matchChildren =
+          selectedChildren === "all" || tags.includes(selectedChildren);
+
+        return matchCategory && matchChildren;
+      });
+
+      return { date, shows: filteredShows };
+    })
+    // Fjern datoer, hvor alle forestillinger er filtreret væk
+    .filter((group) => group.shows.length > 0);
 
   // ========================================= HTML / STYLING ============================================
   return (
     <div className="grid gap-20 px-(--content-width) w-full">
       <h1>KALENDER</h1>
 
-      {/* Dropdown til filtrering på dato */}
-      <div>
-        <select
-          className="cursor-pointer px-4 py-3 rounded-4xl border border-(--bellevueblaa-600) text-(--bellevueblaa-600) w-30"
-          value={selectedDate}
-          onChange={(e) => setSelectedDate(e.target.value)}
-        >
-          <option value="all">Datoer</option>
+      {/* Dropdown til filtrering på dato, kategori og børn */}
+      <KalenderDropdown
+        dates={dateOptions}
+        categories={categories}
+        childrenOptions={childrenOptions}
+        onFilterChange={handleFilterChange}
+      />
 
-          {/* Én option pr. dato i grouped */}
-          {grouped.map(({ date }) => {
-            const iso = date.toISOString().split("T")[0];
-            return (
-              <option key={iso} value={iso}>
-                {formatDate(date)}
-              </option>
-            );
-          })}
-        </select>
-      </div>
-
-      {/* Her vises enten alle datoer eller den filtrerede dato */}
+      {/* Her vises enten alle datoer eller de filtrerede datoer */}
       {filteredGrouped.map(({ date, shows }) => (
         <div key={date.getTime()} className="grid lg:grid-cols-[1fr_2fr] gap-8">
           <div>
@@ -87,6 +121,11 @@ const KalenderSamlet = ({ items }) => {
           </ul>
         </div>
       ))}
+
+      {/* Hvis filtrene fjerner alt */}
+      {!filteredGrouped.length && (
+        <p>Ingen forestillinger matcher dine filtre.</p>
+      )}
     </div>
   );
 };
