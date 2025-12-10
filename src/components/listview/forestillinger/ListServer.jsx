@@ -2,24 +2,25 @@ import { createClient } from "@supabase/supabase-js";
 import { Suspense } from "react";
 import ListFilterClient from "./ListFilterClient";
 
-// Supabase client (fungerer som server)
+// Supabase client (server-side)
 const supabase = createClient(
   "https://rzwaokiepaobrlrpphia.supabase.co",
-
-  // Key som ligger i .env fil
   process.env.SUPABASE_ANON_KEY
 );
 
 export default async function ListServer() {
-  // Hent data fra Supabase med navn på tabel
+  // Hent data fra Supabase
   const { data } = await supabase.from("bellevue_items").select("*");
 
-  console.log("Fetched data:", data);
+  // Filtrér items, så "event" ikke medtages
+  const filteredData = data?.filter(item => !item.tags?.includes("Event")) || [];
+  
+  console.log("Fetched data (filtered):", filteredData);
 
   return (
-     <section>
+    <section>
       <Suspense fallback={<p>Loading...</p>}>
-        <ListFilterClient items={data || []} />
+        <ListFilterClient items={filteredData} />
       </Suspense>
     </section>
   );

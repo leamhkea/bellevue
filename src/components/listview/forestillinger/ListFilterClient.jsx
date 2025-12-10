@@ -59,6 +59,7 @@ const archive = filterItemsByStatus(itemsWithLatestDate, "archive");
     if (type === "category") setSelectedCategory(value);
   };
 
+  
   const removeCategoryFilter = () => setSelectedCategory(null);
 
   return (
