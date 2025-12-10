@@ -75,7 +75,9 @@ export default function SnapWrapper({ image, children }) {
       >
         <div className="h-[90vh] snap-start" />
 
-        <div className={`h-[90vh] ${count > 1 ? "snap-start" : ""} text-(--hvid)`}>
+        <div
+          className={`h-[90vh] ${count > 1 ? "snap-start" : ""} text-(--hvid)`}
+        >
           {count > 1 ? <Karrusel>{validChildren}</Karrusel> : validChildren}
         </div>
       </div>

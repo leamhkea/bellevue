@@ -7,12 +7,14 @@ import LejTeatret from "./LejTeatret";
 const OmSamlet = () => {
   return (
     // ========================= WRAPPER FOR ALLE COMPONENTS ==========================
-    <div className="flex flex-col gap-30">
+    <div>
       <Intro />
-      <RundvisningInfo />
-      <BilledeSektion />
-      <InteraktivtKort />
-      <LejTeatret />
+      <div className="flex flex-col gap-30">
+        <RundvisningInfo />
+        <BilledeSektion />
+        <InteraktivtKort />
+        <LejTeatret />
+      </div>
     </div>
   );
 };

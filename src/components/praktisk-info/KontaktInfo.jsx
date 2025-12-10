@@ -7,12 +7,18 @@ const KontaktInfo = () => {
       <h3 className="text-center">Har du spørgsmål? Kontakt os endelig</h3>
 
       {/* ====================== PHONE ABSOLUTE ========================== */}
-      <div className="absolute -left-10">
-        <Image src="/svg/phone.svg" alt="" width={350} height={350} />
+      <div className="relative -left-8 hidden lg:block">
+        <Image
+          src="/svg/phone.svg"
+          alt=""
+          width={350}
+          height={350}
+          className="absolute"
+        />
       </div>
 
       {/* ======================== GUL CONTAINERS ======================== */}
-      <section className="bg-(--gul-600) flex justify-end gap-40 py-10 text-center">
+      <section className="bg-(--gul-600) flex flex-wrap justify-center lg:justify-end gap-20 lg:gap-40 py-10 text-center">
         <div>
           <h4>Administration</h4>
           <div className="font-light pt-5">

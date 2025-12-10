@@ -1,14 +1,14 @@
 "use client";
 import { useMemo, useState } from "react";
+import { groupShowsByDate, extractCategories } from "@/app/library/utils.js";
 import KalenderCard from "./KalenderCard";
 import KalenderDropdown from "./KalenderDropdown";
-import { groupShowsByDate, extractCategories } from "@/app/library/utils.js";
-import Image from "next/image";
+import PrimaryButton from "@/components/global/knapper/PrimaryButton";
 
 // ======================================= KALENDER-KOMPONENT ============================================
 const KalenderSamlet = ({ items }) => {
   // Hvis der slet ikke er items
-  if (!items?.length) return <p>Ingen items fundet</p>;
+  if (!items?.length) return <p>Ingen forestillinger eller events fundet</p>;
 
   // Gruppér forestillinger pr. dato og filtrér til KUN fremtidige datoer
   const grouped = useMemo(
@@ -18,7 +18,7 @@ const KalenderSamlet = ({ items }) => {
 
   // Hvis alle forestillinger lå i fortiden
   if (!grouped.length) {
-    return <p>Ingen kommende forestillinger.</p>;
+    return <p>Ingen kommende forestillinger eller events.</p>;
   }
 
   // ====================================== DROPDOWN-FILTRERING ==========================================
@@ -66,6 +66,20 @@ const KalenderSamlet = ({ items }) => {
     }
   };
 
+  // Samlet funktion til at fjerne filtre
+  const removeFilter = (type) => {
+    if (type === "date") setSelectedDate("all");
+    if (type === "category") setSelectedCategory("all");
+    if (type === "children") setSelectedChildren("all");
+  };
+
+  // Array af aktive filtre
+  const activeFilters = [
+    { type: "date", value: selectedDate, label: selectedDate },
+    { type: "category", value: selectedCategory, label: selectedCategory },
+    { type: "children", value: selectedChildren, label: selectedChildren },
+  ].filter((filter) => filter.value !== "all");
+
   // Hvis "all" er valgt -> vis alle datoer, ellers filtrér på valgt dato
   // + filtrér på kategori/børn ud fra tags på forestillingerne
   const filteredGrouped = grouped
@@ -102,9 +116,23 @@ const KalenderSamlet = ({ items }) => {
       <KalenderDropdown
         dates={dateOptions}
         categories={categories}
-        childrenOptions={childrenOptions}
+        children={childrenOptions}
         onFilterChange={handleFilterChange}
       />
+
+      {/* Vis aktive filtre */}
+      {activeFilters.length > 0 && (
+        <div className="flex gap-2 flex-wrap">
+          {activeFilters.map((filter) => (
+            <PrimaryButton
+              key={filter.type}
+              onClick={() => removeFilter(filter.type)}
+            >
+              {filter.label} ×
+            </PrimaryButton>
+          ))}
+        </div>
+      )}
 
       {/* Her vises enten alle datoer eller de filtrerede datoer */}
       {filteredGrouped.map(({ date, shows }) => (
@@ -127,9 +155,6 @@ const KalenderSamlet = ({ items }) => {
       {!filteredGrouped.length && (
         <p>Ingen forestillinger matcher dine filtre.</p>
       )}
-      {/* <div className="absolute -right-2">
-        <Image src="/svg/snoerkel-top-left.svg" alt="" width={400} height={900} />
-      </div> */}
     </div>
   );
 };

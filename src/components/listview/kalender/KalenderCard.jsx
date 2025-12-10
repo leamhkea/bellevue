@@ -83,11 +83,11 @@ const KalenderCard = ({ item, time }) => {
         >
           {/* INDHOLDET BILLEDE */}
           <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 ">
-            {item.image?.[0] && (
+            {item.image?.[0]?.url && (
               <div className="flex shrink-0 w-full">
                 <Image
                   src={item.image[0].url}
-                  alt={item.image[0].alt}
+                  alt={item.image[0].alt || "Forestillingsbillede"}
                   width={200}
                   height={200}
                   className="object-cover rounded-xl h-full w-full"

@@ -2,6 +2,9 @@
 
 import DropDown from "@/components/global/komponenter/DropDown";
 
+// Er en præsentationskomponent
+// Modtager bare de færdige options som props
+// Sender valg tilbage til parent (KalenderSamlet) via onFilterChange
 export default function KalenderDropdown({
   dates = [],
   categories = [],

@@ -3,13 +3,13 @@ import Image from "next/image";
 const InfoBokse = () => {
   return (
     <section>
-      <div className="flex flex-col gap-16 items-stretch sm:flex-row sm:justify-between sm:gap-8">
+      <div className="flex flex-col gap-16 items-stretch md:flex-row md:justify-between md:gap-8">
         {/* ==============================   CLOCK   ============================== */}
         <div className="relative flex-1">
           <div className="absolute -top-12 left-6">
             <Image src="/svg/clock.svg" alt="" width={80} height={80} />
           </div>
-          <div className="highlighttext bg-(--gul-600) rounded-2xl px-6 py-10 h-full items-center justify-center">
+          <div className="bg-(--gul-600) rounded-2xl px-6 py-10 h-full items-center justify-center">
             <div className="flex flex-col gap-8 text-center">
               <h3>Åbningstider</h3>
               <p>
@@ -31,7 +31,7 @@ const InfoBokse = () => {
             <Image src="/svg/car.svg" alt="" width={80} height={80} />
           </div>
 
-          <div className="highlighttext bg-(--gul-600) rounded-2xl px-6 py-10 h-full items-center justify-center">
+          <div className="bg-(--gul-600) rounded-2xl px-6 py-10 h-full items-center justify-center">
             <div className="flex flex-col gap-8 text-center">
               <h3>Parkering</h3>
               <p>Der er gratis og ubegrænset parkering bag teatret.</p>
@@ -50,7 +50,7 @@ const InfoBokse = () => {
             <Image src="/svg/suitcase.svg" alt="" width={80} height={80} />
           </div>
 
-          <div className="highlighttext bg-(--gul-600) rounded-2xl px-6 py-10 h-full items-center justify-center">
+          <div className="bg-(--gul-600) rounded-2xl px-6 py-10 h-full items-center justify-center">
             <div className="flex flex-col gap-8 text-center">
               <h3>Glemte sager</h3>
               <p>

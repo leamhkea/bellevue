@@ -73,7 +73,7 @@ const QACard = () => {
           <li key={item.id}>
             {/* CARD HEADER */}
             <div
-              className={`flex justify-between p-10 transition-colors duration-300 gap-15 flex-col sm:flex-row 
+              className={`flex items-center justify-between p-10 transition-colors duration-300 gap-15 flex-row flex-nowrap 
                 ${isOpen ? "bg-(--beige-300)" : "bg-(--beige-100)"} 
                 ${noBottomRadius ? "rounded-t-2xl" : "rounded-2xl"}
               `}
