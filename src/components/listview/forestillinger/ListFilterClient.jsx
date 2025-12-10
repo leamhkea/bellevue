@@ -54,7 +54,7 @@ const archive = filterItemsByStatus(itemsWithLatestDate, "archive");
       item.tags?.includes(selectedCategory)
     );
   }
-
+  
   const handleFilterChange = (type, value) => {
     if (type === "category") setSelectedCategory(value);
   };
