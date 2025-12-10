@@ -1,6 +1,23 @@
 "use client";
 
+import { useState } from "react";
+import PopupNyhedsbrev from "../global/komponenter/PopupNyhedsbrev";
+
 const Footer = () => {
+  const [showPopup, setShowPopup] = useState(false);
+  const [email, setEmail] = useState("");
+
+  const handleTilmeldClick = () => {
+    if (!email.trim()) return; // kan tilføje validering senere
+
+    setShowPopup(true);
+    setEmail(""); // nulstil feltet
+  };
+
+  const handleClosePopup = () => {
+    setShowPopup(false);
+  };
+
   return (
     <div className="bg-(--moerkblaa-600) text-(--moerkblaa-100) grid grid-cols-1 md:grid-cols-3 gap-8 p-5">
       {/* --- Kolonne 1 --- */}
@@ -24,7 +41,7 @@ const Footer = () => {
 
       {/* --- Kolonne 2 --- */}
       <div className="pt-10 md:pt-40 flex flex-col items-center text-center">
-        <h3 className=" pb-4 text-white text-2xl beige-100">
+        <h3 className="pb-4 text-white text-2xl beige-100">
           Hold dig opdateret
         </h3>
         <p className="text-(--beige-600)">
@@ -33,12 +50,17 @@ const Footer = () => {
         </p>
         <div className="w-full mx-auto flex flex-col gap-2 pt-10">
           <input
-            id="email"
+            id="footer-email"
             type="email"
             placeholder="Skriv din email"
-            className="bg-(--beige-600) rounded-xl p-4 w-full text-(--moerkblaa-900) border-2 border-(--beige-900)"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="bg-(--beige-600) rounded-xl p-4 w-full text-(--moerkblaa-900) border-2 border-(--beige-900) focus:outline-none"
           />
-          <button className="bg-(--beige-900) self-center font-bold border-3 border-(--beige-600) w-full pt-4 pb-4 rounded-xl text-(--moerkblaa-900)">
+          <button
+            onClick={handleTilmeldClick}
+            className="bg-(--beige-900) self-center font-bold border-3 border-(--beige-600) w-full pt-4 pb-4 rounded-xl text-(--moerkblaa-900)"
+          >
             Tilmeld
           </button>
         </div>
@@ -68,6 +90,9 @@ const Footer = () => {
           </p>
         </div>
       </div>
+
+      {/* Popup */}
+      {showPopup && <PopupNyhedsbrev onClose={handleClosePopup} />}
     </div>
   );
 };
