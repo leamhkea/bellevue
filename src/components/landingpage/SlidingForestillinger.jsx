@@ -16,26 +16,29 @@ const chunk = (arr, size) => {
 
 const SlidingForestillinger = ({ data }) => {
   const now = new Date();
+  const threeMonthsAhead = new Date();
+  threeMonthsAhead.setMonth(threeMonthsAhead.getMonth() + 3);
 
   const itemsWithLatestDate = useMemo(
     () => parseDates(data, { addLatestDate: true }),
     [data]
   );
-
-  const upcoming = itemsWithLatestDate.filter(
-    (item) => item.latestDate.getTime() >= now.getTime()
-  );
+//sørger for at det kun er items, der er i fremtiden, men kun tre måneder fremme, der vises som aktuelt
+  const upcoming = itemsWithLatestDate.filter((item) => {
+    const d = item.latestDate;
+    return d >= now && d <= threeMonthsAhead;
+  });
 
   return (
     <>
       <div className="absolute -left-1 top-400 -z-5 hidden lg:block">
-          <Image
-            src="/svg/snoerkel-left.svg"
-            alt=""
-            width={350}
-            height={350}
-          />
-    </div>
+        <Image
+          src="/svg/snoerkel-left.svg"
+          alt=""
+          width={350}
+          height={350}
+        />
+      </div>
       <div className="pl-25 mt-10">
         <h2>Aktuelle forestillinger</h2>
         <PrimaryLink href="/forestillinger">
