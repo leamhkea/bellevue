@@ -152,8 +152,10 @@ export default function ListFilterClient({ items }) {
           </h1>
         </button>
 
-        <WipeLineAnimation activeTab={activeTab} tabWidths={tabWidths} />
-      </div>
+{/* Underline kun på store skærme */}
+<div className="hidden md:block">
+  <WipeLineAnimation activeTab={activeTab} tabWidths={tabWidths} />
+</div>      </div>
 
       {/* Grafik */}
       <div className="absolute -right-2 hidden lg:block">
