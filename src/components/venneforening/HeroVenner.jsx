@@ -15,8 +15,9 @@ import HighlightCards from "../global/komponenter/HighLightCard";
         <BellevueStriber>
           <section className="pt-60">
           <h1 className="pb-20 text-center">BELLEVUE TEATRETS VENNER</h1>
-          <div className="grid grid-cols-2"> 
-          <div> 
+          
+          <div className="grid grid-cols-1 md:grid-cols-2"> 
+          <div className="text-center md:text-left"> 
             <p className="font-medium pb-5">Bliv en del af Bellevue Teatrets Venner
              – fællesskabet for dig, der elsker kultur, nærvær og store oplevelser.</p> 
              <p className="font-light">Som medlem støtter du ikke blot teatret og dets kunstneriske arbejde
@@ -28,7 +29,7 @@ import HighlightCards from "../global/komponenter/HighLightCard";
           </div>
   
             {/* Gule felter */}
-            <div className="pt-40 pb-20">
+            <div className="pt-40 pb-20 flex flex-col gap-12">
               <HighlightCards items={highlightItems} />
             </div>
           </section>
