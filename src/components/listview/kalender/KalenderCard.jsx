@@ -8,7 +8,6 @@ import Image from "next/image";
 import PrimaryButton from "@/components/global/knapper/PrimaryButton";
 import AnchorTagPrimaryButton from "@/components/global/knapper/AnchorTagPrimaryButton";
 import SecondaryButton from "@/components/global/knapper/SecondaryButton";
-import AnchorTagSecondaryButton from "@/components/global/knapper/AnchorTagSecondaryButton";
 
 const KalenderCard = ({ item, time }) => {
   const [openId, setOpenId] = useState(null);
@@ -37,14 +36,12 @@ const KalenderCard = ({ item, time }) => {
       <div className="transition-colors duration-300">
         {/* ============================= CARD ============================= */}
         <div
-          className={`flex justify-between p-10 transition-colors duration-300 gap-15 shadow-md ${
+          className={`flex items-start justify-between p-10 transition-colors duration-300 shadow-md ${
             isOpen ? "bg-(--beige-300)" : "bg-(--beige-100)"
-          } ${
-            noBottomRadius ? "rounded-t-2xl" : "rounded-2xl"
-          } flex-col gap-6 sm:flex-row`}
+          } ${noBottomRadius ? "rounded-t-2xl" : "rounded-2xl"} gap-6`}
         >
           {/* INFORMATION */}
-          <div className="grid gap-5">
+          <div className="grid gap-5 min-w-0">
             <div className="w-50">
               <div className="grid grid-cols-3">
                 <p>{displayTime}</p>
@@ -57,22 +54,27 @@ const KalenderCard = ({ item, time }) => {
             </div>
 
             {/* FORESTILLING NAVN */}
-            <h4>{item.name}</h4>
+            <h4 className="wrap-break-words">{item.name}</h4>
           </div>
 
-          {/* KNAPPEN */}
-          <div className="flex gap-4 self-start sm:self-end">
+          {/* KNAPPER */}
+          <div className="flex gap-6 shrink-0 whitespace-nowrap">
             <AnchorTagPrimaryButton href={`/forestillinger/${item.id}`}>
               Køb billet
             </AnchorTagPrimaryButton>
-            {!isOpen ? (<SecondaryButton onClick={() => toggle(item.id)}>
-              Læs Mere
-            </SecondaryButton>): (
-              <button onClick={() => toggle(item.id)}>
-                X
+
+            {!isOpen ? (
+              <SecondaryButton onClick={() => toggle(item.id)}>
+                Læs Mere
+              </SecondaryButton>
+            ) : (
+              <button
+                className="text-(--roed-600)"
+                onClick={() => toggle(item.id)}
+              >
+                Luk igen
               </button>
-            ) }
-            
+            )}
           </div>
         </div>
 
@@ -106,9 +108,9 @@ const KalenderCard = ({ item, time }) => {
               <p>{item.description_short}</p>
 
               <div className="self-start sm:self-end">
-                <AnchorTagSecondaryButton href={`/forestillinger/${item.id}`}>
+                <AnchorTagPrimaryButton href={`/forestillinger/${item.id}`}>
                   Læs mere
-                </AnchorTagSecondaryButton>
+                </AnchorTagPrimaryButton>
               </div>
             </div>
           </div>

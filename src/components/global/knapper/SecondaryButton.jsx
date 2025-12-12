@@ -21,7 +21,7 @@ const SecondaryButton = ({ children, onClick }) => {
         {children}
       </p>
 
-      <div className="w-[26px] h-[26px] flex items-center justify-center overflow-hidden">
+      <div className="w-[26px] h-[26px] flex items-center justify-center overflow-hidden ">
         <motion.div
           animate={{ x: hovered ? 5 : 0 }}
           transition={{ duration: 0.25, ease: "easeOut" }}
