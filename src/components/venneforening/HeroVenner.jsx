@@ -1,5 +1,5 @@
 import BellevueStriber from "@/components/global/animationer/BellevueStriber";
-// import Image from "next/image";
+import Image from "next/image";
 import HighlightCards from "../global/komponenter/HighLightCard";
 
   
@@ -15,6 +15,9 @@ import HighlightCards from "../global/komponenter/HighLightCard";
         <BellevueStriber>
           <section className="pt-60">
           <h1 className="pb-20 text-center">BELLEVUE TEATRETS VENNER</h1>
+          <div className="absolute -right-10 -top-10 hidden lg:block">
+        <Image src="/svg/venneforening-logo-stor.svg" alt="" width={700} height={350} />
+      </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2"> 
           <div className="text-center md:text-left"> 

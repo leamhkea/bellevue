@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import PopupNyhedsbrev from "../global/komponenter/PopupNyhedsbrev";
+import Image from "next/image";
 
 const BlivMedlem = () => {
   const [showPopup, setShowPopup] = useState(false);
@@ -56,6 +57,14 @@ const BlivMedlem = () => {
         <div className="p-0 md:p-20 md:px-4 mx-auto max-w-xl">
           <div className="col-span-2 bg-(--bellevueblaa-600) text-(--beige-600) rounded-0 md:rounded-2xl p-10">
             <div className="w-full mx-auto flex flex-col gap-5 font-light">
+            <div className="flex justify-center">
+          <Image
+            src="/svg/venneforening-logo-lille.svg"
+            alt=""
+            width={100}
+            height={900}
+          />
+        </div>
               {/* NAVN INPUT */}
               <div className={`relative ${shake.navn ? "animate-shake" : ""}`}>
                 <input
@@ -107,7 +116,7 @@ const BlivMedlem = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section> 
 
       {/* Popup */}
       {showPopup && <PopupNyhedsbrev onClose={handleClosePopup} />}
