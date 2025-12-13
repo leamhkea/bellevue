@@ -4,8 +4,6 @@ import Image from "next/image";
 import { useState } from "react";
 import PopupNyhedsbrev from "../global/komponenter/PopupNyhedsbrev";
 
-
-
 const Nyhedsbrev = () => {
   const [showPopup, setShowPopup] = useState(false);
   const [email, setEmail] = useState("");

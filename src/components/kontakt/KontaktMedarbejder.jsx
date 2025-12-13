@@ -1,15 +1,13 @@
-"use client";
 import Image from "next/image";
 
 export default function KontaktMedarbejder({ employees = [] }) {
-  if (!employees.length) return <p>Ingen employees fundet</p>;
 
   return (
     <>
       {employees.map((employee) => (
         <li
           key={employee.id}
-          className="flex flex-col transform transition-transform duration-300 pl-15 pt-20 text-center"
+          className="flex flex-col transition-transform duration-300 px-5 pt-20 text-center"
         >
           {employee.image?.[0] && (
             <div className="flex shrink-0 w-full">

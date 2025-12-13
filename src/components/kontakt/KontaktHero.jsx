@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 const KontaktHero = () => (
-  <div>
+  <>
     {/* HERO SEKTION */}
     <section className="max-w-[1000px]">
       <h1 className="text-(--bellevueblaa-600)">KONTAKT</h1>
@@ -44,13 +44,13 @@ const KontaktHero = () => (
 
         <div>
           <h3 className="text-xl sm:text-2xl font-bold">Forhus</h3>
-          <div className="font-extralight  pt-5">
+          <div className="font-extralight pt-5">
             <p>Forhus@bellevueteatret.dk</p>
           </div>
         </div>
       </section>
     </div>
-  </div>
+  </>
 );
 
 export default KontaktHero;

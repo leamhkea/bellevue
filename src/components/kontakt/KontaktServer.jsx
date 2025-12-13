@@ -9,16 +9,14 @@ const supabase = createClient(
 export default async function KontaktServer() {
   const { data, error } = await supabase.from("bellevue_employees").select("*");
 
-  console.log("Fetched data:", data);
-  console.log("Error:", error);
+  // console.log("Fetched data:", data);
+  // console.log("Error:", error);
 
   if (error) {
     return <p>Der skete en fejl med at hente.</p>;
   }
 
   return (
-    <div>
       <KontaktFilter employees={data || []} />
-    </div>
   );
 }
