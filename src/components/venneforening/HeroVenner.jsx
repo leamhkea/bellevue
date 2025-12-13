@@ -5,7 +5,7 @@ import HighlightCards from "../global/komponenter/HighLightCard";
   
   const HeroVenner = () => {
     const highlightItems = [
-      { icon: "/svg/billet.svg", text: "Billetter til udvalgte forestillinger" },
+      { icon: "/svg/billet.svg", text: "Gratis billetter til udvalgte forestillinger" },
       { icon: "/svg/exclusiv.svg", text: "Eksklusive arrangementer for medlemmer", iconWidth: 80, iconHeight: 80 },
       { icon: "/svg/people.svg", text: "12 måneders medlemskab 600 kr." },
     ];

@@ -24,6 +24,8 @@ const VennerKarrusel = ({ data }) => {
     (item) => item.latestDate.getTime() >= now.getTime()
   );
 
+  const medlemstilbud = upcoming.filter((tilbud)=>tilbud.venneforening === true);
+
   return (
     <>
         <div className="pl-25">
@@ -32,9 +34,9 @@ const VennerKarrusel = ({ data }) => {
           </h2>
         </div>
         <ResponsiveKarrusel>
-          {upcoming.map((item) => (
+          {medlemstilbud.map((item) => (
             <section>
-            <ListCard key={item.id} item={item} />
+            <ListCard key={item.id} item={item} medlemstilbud={medlemstilbud} />
             </section>
           ))}
         </ResponsiveKarrusel>

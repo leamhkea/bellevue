@@ -4,7 +4,8 @@ import Link from "next/link";
 import AnchorTagPrimaryButton from "@/components/global/knapper/AnchorTagPrimaryButton";
 import SecondaryButton from "@/components/global/knapper/AnchorTagSecondaryButton";
 
-export default function ListCard({ item }) {
+export default function ListCard({ item, medlemstilbud }) {
+
   return (
     <li className="relative ml-4 mr-4 mt-10 ">
       <div
@@ -38,17 +39,27 @@ export default function ListCard({ item }) {
           <div className="flex justify-between">
             <h4 className="font-medium line-clamp-1">{item.name}</h4>
           </div>
-          <p className="font-extralight pt-2 text-md">{item.date}</p>
-          <p className=" font-light">{item.description}</p>
+          {medlemstilbud ? (<p className="font-extralight pt-2 text-md">{item.venne_fordele.date}</p>
+          ):(
+            <p className="font-extralight pt-2 text-md">{item.date}</p>
+          )}
+          <p className=" font-light">{item.description_short}</p>
         </div>
 
         {/* Knapper - altid i bunden */}
         <div className="p-3 pt-0 pb-10 items-center justify-center mt-auto">
           <div className="flex justify-center items-center gap-10 w-full pt-10">
             <div>
+            {medlemstilbud ? (
+              // Note: Skal være scroll to anchor tag
+              <AnchorTagPrimaryButton href={`/forestillinger/${item.id}`}>
+                Find billet
+              </AnchorTagPrimaryButton>
+            ):(
               <AnchorTagPrimaryButton href={`/forestillinger/${item.id}`}>
                 Køb billet
               </AnchorTagPrimaryButton>
+            )}
             </div>
             <div>
               <SecondaryButton href={`/forestillinger/${item.id}`}>
