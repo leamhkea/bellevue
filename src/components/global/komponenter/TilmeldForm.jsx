@@ -1,8 +1,9 @@
 "use client";
 import { useState } from "react";
 import PopupNyhedsbrev from "./PopupNyhedsbrev";
+import Tilmeld from "../knapper/Tilmeld";
 
-const TilmeldForm = ({ fields, render }) => {
+const TilmeldForm = ({ fields, onSuccess, buttonText = "Tilmeld" }) => {
   const [values, setValues] = useState({});
   const [errors, setErrors] = useState({});
   const [shake, setShake] = useState({});
@@ -39,17 +40,32 @@ const TilmeldForm = ({ fields, render }) => {
 
   return (
     <>
-       {render({
-        values,
-        errors,
-        shake,
-        handleChange,
-        handleSubmit,
-      })}
+      {fields.map((field) => (
+        <div
+          key={field.name}
+          className={`relative ${shake[field.name] ? "animate-shake" : ""} mb-4`}
+        >
+          <input
+            type={field.type || "text"}
+            placeholder={field.placeholder}
+            value={values[field.name] || ""}
+            onChange={(e) => handleChange(field.name, e.target.value)}
+            className={`bg-(--beige-600) rounded-xl p-4 w-full text-(--moerkblaa-900) border-2 ${
+              errors[field.name] ? "border-(--roed-600)" : "border-transparent"
+            }`}
+          />
+          {errors[field.name] && (
+            <p className="text-(--roed-600) text-sm mt-1 absolute top-full left-0">
+              {errors[field.name]}
+            </p>
+          )}
+        </div>
+      ))}
+
+      <Tilmeld onClick={handleSubmit}>{buttonText}</Tilmeld>
 
       {showPopup && <PopupNyhedsbrev onClose={() => setShowPopup(false)} />}
 
-      {/* Shake animation */}
       <style jsx>{`
         @keyframes shake {
           0% { transform: translateX(0); }
