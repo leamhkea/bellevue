@@ -1,9 +1,6 @@
 "use client";
 
 import Image from "next/image";
-// import { useState } from "react";
-// import PopupNyhedsbrev from "../global/komponenter/PopupNyhedsbrev";
-// import Tilmeld from "../global/knapper/Tilmeld";
 import TilmeldForm from "../global/komponenter/TilmeldForm";
 
 const Nyhedsbrev = () => {
