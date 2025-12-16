@@ -13,9 +13,6 @@ const Kalender = () => {
         />
       </div>
       <KalenderServer />
-      <div className="absolute -left-1 bottom-1 -z-10 hidden lg:block">
-        <Image src="/svg/snoerkel-left.svg" alt="" width={300} height={350} />
-      </div>
     </div>
   );
 };

@@ -4,13 +4,15 @@ import Link from "next/link";
 import AnchorTagPrimaryButton from "@/components/global/knapper/AnchorTagPrimaryButton";
 import SecondaryButton from "@/components/global/knapper/AnchorTagSecondaryButton";
 import ScrollToPrimaryButton from "@/components/global/knapper/ScrollToPrimaryButton";
+import { getItemStatus } from "@/app/library/utils.js";
 
-export default function ListCard({ item, medlemstilbud, archive }) {
+export default function ListCard({ item, medlemstilbud }) {
+    const { isArchived } = getItemStatus(item);
   return (
-    <div className="relative ml-4 mr-4 mt-10 ">
+    <div className="relative pt-5 pb-10">
       <div
         className="
-          relative flex flex-col bg-white rounded-3xl p-2 min-h-[450px]
+          relative flex flex-col bg-white rounded-3xl p-2 md:min-h-[480px]
           before:content-[''] before:absolute before:inset-0
           before:rounded-3xl before:border-l-6 before:border-b-6 before:border-blue-900
           before:pointer-events-none shadow-md
@@ -60,22 +62,26 @@ export default function ListCard({ item, medlemstilbud, archive }) {
         <div className="p-2 pt-0 pb-10 items-center justify-center mt-auto">
           <div className="flex flex-wrap justify-center items-center gap-10 w-full pt-10">
             <div>
-              {medlemstilbud ? (
-                // Note: Skal være scroll to anchor tag
-                <ScrollToPrimaryButton
-                  scrollToId="bookbilletter"
-                  ariaLabel={"Find billetter"}
-                >
-                  Find billetter
-                </ScrollToPrimaryButton>
-              ) : (
-                <AnchorTagPrimaryButton
-                  href={`/forestillinger/${item.id}`}
-                  ariaLabel={"Køb billet"}
-                >
-                  Køb billet
-                </AnchorTagPrimaryButton>
-              )}
+            {!isArchived && (
+          medlemstilbud ? (
+            <ScrollToPrimaryButton
+              scrollToId="bookbilletter"
+              ariaLabel="Find billetter"
+            >
+              Find billetter
+            </ScrollToPrimaryButton>
+          ) : (
+            <AnchorTagPrimaryButton
+              target="_blank"
+              href={item.billetter}
+              ariaLabel="Køb billet"
+            >
+              Køb billet
+            </AnchorTagPrimaryButton>
+          )
+        )}
+
+
             </div>
             <div>
               <SecondaryButton

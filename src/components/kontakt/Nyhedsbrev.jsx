@@ -1,11 +1,10 @@
 "use client";
-
 import Image from "next/image";
 import TilmeldForm from "../global/komponenter/TilmeldForm";
 
 const Nyhedsbrev = () => {
   return (
-    <section className="pt-20 pb-20">
+    <section className="pt-10">
       <div className="p-0 md:px-4 mx-auto max-w-xl">
         <div className="col-span-2 bg-(--bellevueblaa-600) text-(--beige-600) rounded-0 md:rounded-2xl p-10">
           <div className="w-full mx-auto flex flex-col gap-5 font-light">

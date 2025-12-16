@@ -3,6 +3,7 @@ import KontaktServer from "@/components/kontakt/KontaktServer";
 import KontaktHero from "@/components/kontakt/KontaktHero";
 import Nyhedsbrev from "@/components/kontakt/Nyhedsbrev";
 import LedigeStillinger from "@/components/kontakt/LedigeStillinger";
+import Image from "next/image";
 
 export default function Kontakt() {
   return (
@@ -18,7 +19,18 @@ export default function Kontakt() {
       <KontaktHero />
       <KontaktServer />
       <LedigeStillinger />
+      <div className="relative">
       <Nyhedsbrev />
+    
+       <div className="absolute right-0 -bottom-40 -z-10 hidden lg:block rotate-180">
+              <Image
+                src="/svg/snoerkel-top-right.svg"
+                alt=""
+                width={600}
+                height={350}
+                />
+            </div>
+                </div>
     </div>
   );
 }

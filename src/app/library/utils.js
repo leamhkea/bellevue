@@ -105,56 +105,56 @@ export function extractCategories(data) {
   return [...new Set(allTags)];
 }
 
+// ===================================== filtrering af aldersgrupper ==========================================
+export function extractAldersgruppe(data) {
+  if (!Array.isArray(data)) return [];
+
+  const allGroups = data
+    .map((item) => item.aldersgruppe)   // hent aldersgruppe
+    .filter(Boolean);                  // fjern undefined/null
+
+  return [...new Set(allGroups)];      // returner unikke værdier
+}
+
 // ========================== Gruppér kalender-items pr. dato og split tider ud =============================
 
 // Gruppér forestillinger efter dato og split tider ud pr. tidspunkt
 export function groupShowsByDate(items, { onlyFuture = false } = {}) {
   const today = new Date();
-  today.setHours(0, 0, 0, 0); // bruges til filtrering af fortiden
+  today.setHours(0, 0, 0, 0);
 
-  const map = new Map(); // ts -> shows[]
+  const map = new Map();
 
   items.forEach((item) => {
     item.fullDates?.forEach((entry) => {
-      // Parse dato + evt. tid via parseDates
+      // parse dato + evt. tid
       const parsed = parseDates([entry])[0];
       if (!parsed) return;
 
-      // Brug ren dato som key (ikke tidspunkt)
       const dateKey = new Date(parsed);
       dateKey.setHours(0, 0, 0, 0);
 
-      // Filtrér fortid fra hvis onlyFuture === true
       if (onlyFuture && dateKey < today) return;
 
       const ts = dateKey.getTime();
 
-      // Split tider ud i et array
-      const rawTimes = Array.isArray(entry.time)
-        ? entry.time.join(",")
-        : entry.time || "";
-
-      const times = rawTimes
-        .split(",")
-        .map((t) => t.trim())
-        .filter(Boolean);
-
-      // Sikr at datoen findes i map
       if (!map.has(ts)) map.set(ts, []);
 
-      // Tilføj et show pr. tidspunkt
-      if (times.length === 0) {
-        // ingen tid angivet → push uden tid
-        map.get(ts).push({ item, time: null });
-      } else {
-        times.forEach((time) => {
-          map.get(ts).push({ item, time });
+      if (!entry.time) {
+        // Ingen tid
+        map.get(ts).push({ item, time: null, billet: entry.billet || item.billetter });
+      } else if (typeof entry.time === "string") {
+        // Tid som streng
+        map.get(ts).push({ item, time: entry.time, billet: entry.billet || item.billetter });
+      } else if (Array.isArray(entry.time)) {
+        // Tid som array af objekter
+        entry.time.forEach((t) => {
+          map.get(ts).push({ item, time: t.time, billet: t.billet });
         });
       }
     });
   });
 
-  // Sortér datoerne og returnér som array
   return [...map.entries()]
     .sort(([a], [b]) => a - b)
     .map(([ts, shows]) => ({
@@ -165,7 +165,7 @@ export function groupShowsByDate(items, { onlyFuture = false } = {}) {
 
 // ========================== Arkiverede versus aktive forestillinger =============================
 
-/* Beregn seneste dato og arkiveret status for et item*/
+/* Beregn seneste dato og arkiveret status for et item */
 export function getItemStatus(item) {
   if (!item?.fullDates || !Array.isArray(item.fullDates)) {
     return { latestDate: null, isArchived: false };
@@ -174,8 +174,11 @@ export function getItemStatus(item) {
   const parsed = parseDates([item], { addLatestDate: true })[0];
   if (!parsed?.latestDate) return { latestDate: null, isArchived: false };
 
-  const now = new Date();
-  const isArchived = parsed.latestDate.getTime() < now.getTime();
+  const today = new Date();
+  // Sæt tid til slutningen af dagen
+  const endOfToday = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 23, 59, 59, 999);
+
+  const isArchived = parsed.latestDate.getTime() < endOfToday.getTime();
 
   return { latestDate: parsed.latestDate, isArchived };
 }
@@ -186,14 +189,15 @@ export function getItemStatus(item) {
  * @param {string} status "current" eller "archive"
  */
 export function filterItemsByStatus(items, status = "current") {
-  const now = new Date();
+  const today = new Date();
+  const endOfToday = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 23, 59, 59, 999);
 
   return items.filter((item) => {
     const { latestDate } = getItemStatus(item);
     if (!latestDate) return false;
 
     return status === "current"
-      ? latestDate.getTime() >= now.getTime()
-      : latestDate.getTime() < now.getTime();
+      ? latestDate.getTime() >= endOfToday.getTime()
+      : latestDate.getTime() < endOfToday.getTime();
   });
 }

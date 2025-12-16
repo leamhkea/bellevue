@@ -3,13 +3,7 @@ import ListCard from "../listview/forestillinger/ListCard";
 import { parseDates } from "@/app/library/utils";
 import { useMemo } from "react";
 import ResponsiveKarrusel from "../global/komponenter/ResponsiveKarrusel";
-
-const chunk = (arr, size) => {
-  return arr.reduce((acc, _, i) => {
-    if (i % size === 0) acc.push(arr.slice(i, i + size));
-    return acc;
-  }, []);
-};
+import { groupShowsByDate} from "@/app/library/utils";
 
 const VennerKarrusel = ({ data }) => {
   const now = new Date();
@@ -23,9 +17,20 @@ const VennerKarrusel = ({ data }) => {
     (item) => item.latestDate.getTime() >= now.getTime()
   );
 
-  const medlemstilbud = upcoming.filter(
+    const grouped = useMemo(() => groupShowsByDate(upcoming, { onlyFuture: true }), [
+  upcoming,
+]);
+
+const allShows = grouped.flatMap(group => group.shows.map(show => show.item));
+
+// Fjern dubletter baseret på item.id
+const uniqueShows = Array.from(new Map(allShows.map(item => [item.id, item])).values());
+ 
+const medlemstilbud = uniqueShows.filter(
     (tilbud) => tilbud.venneforening === true
   );
+
+
 
   return (
     <section>

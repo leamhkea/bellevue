@@ -37,13 +37,13 @@ const HeroVenner = () => {
                 Bliv en del af Bellevue Teatrets Venner – fællesskabet for dig,
                 der elsker kultur, nærvær og store oplevelser.
               </p>
-              <p className="font-light">
+              <p>
                 Som medlem støtter du ikke blot teatret og dets kunstneriske
                 arbejde – du får også adgang til en række helt særlige fordele,
                 eksklusive invitationer og unikke oplevelser, vi kun deler med
                 vores venner.
               </p>
-              <p className="font-light">
+              <p>
                 {" "}
                 Det er vores måde at sige tak på - og din mulighed for at komme
                 tættere på det teater, du holder af.

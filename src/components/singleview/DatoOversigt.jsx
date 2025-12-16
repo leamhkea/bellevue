@@ -10,6 +10,7 @@ import { format } from "date-fns";
 
 const DatoOversigt = ({ item }) => {
   const [selected, setSelected] = useState();
+
   // --- kun fremtidige datoer ---
   const allowedDates = useMemo(
     () => parseDates(item?.fullDates || [], { onlyFuture: true }),
@@ -21,38 +22,69 @@ const DatoOversigt = ({ item }) => {
     [allowedDates]
   );
 
-  // map dato og tidspunkter
-  const timesByDate = useMemo(() => {
-    const map = new Map();
-    (item?.fullDates || []).forEach((entry) => {
-      if (!entry?.date) return;
-      const dt = parseDates([entry])[0]; // bruger utils til parsing
-      if (!dt) return;
-      const key = dt.getTime();
+  //normalisering af data
+  function normalizeFullDates(fullDates = []) {
+  return fullDates
+    .map((entry) => {
+      if (!entry?.date) return null;
 
-      let raw = entry?.time;
+      const parsedDate = parseDates([entry])[0];
+      if (!parsedDate) return null;
+
       let slots = [];
-      //denne del sørger for at datoer filtreres korrekt ift. api'et
-      if (Array.isArray(raw)) {
-        raw.forEach((r) => {
-          if (typeof r === "string")
-            slots.push(...r.split(",").map((s) => s.trim()));
-        });
-      } else if (typeof raw === "string") {
-        slots.push(...raw.split(",").map((s) => s.trim()));
+
+      // NY struktur (array af objekter)
+      if (Array.isArray(entry.time)) {
+        slots = entry.time
+          .filter((t) => t?.time)
+          .map((t) => ({
+            time: t.time.trim(),
+            billet: t.billet ?? null,
+          }));
       }
 
-      slots = Array.from(new Set(slots.filter(Boolean)));
-      if (slots.length === 0) return;
+      // GAMMEL struktur (string)
+      else if (typeof entry.time === "string") {
+        slots = entry.time
+          .split(",")
+          .map((t) => t.trim())
+          .filter(Boolean)
+          .map((t) => ({
+            time: t,
+            billet: entry.billet ?? null,
+          }));
+      }
 
-      map.set(
-        key,
-        map.has(key) ? Array.from(new Set([...map.get(key), ...slots])) : slots
-      );
-    });
+      if (slots.length === 0) return null;
 
-    return map;
-  }, [item]);
+      return {
+        date: parsedDate,
+        slots,
+      };
+    })
+    .filter(Boolean);
+}
+
+
+  // map dato og tidspunkter
+const timesByDate = useMemo(() => {
+  const map = new Map();
+  const normalized = normalizeFullDates(item?.fullDates);
+
+  normalized.forEach(({ date, slots }) => {
+    const key = date.setHours(0, 0, 0, 0);
+
+    map.set(
+      key,
+      map.has(key)
+        ? [...map.get(key), ...slots]
+        : slots
+    );
+  });
+
+  return map;
+}, [item]);
+
 
   const handleSelect = (date) => {
     if (!date) return setSelected(null);
@@ -177,13 +209,18 @@ const DatoOversigt = ({ item }) => {
         <div className="flex">
           {selected ? (
             <ul className="flex gap-10">
-              {(timesByDate.get(selected.getTime()) || []).map((time) => (
-                <li key={time}>
-                  <AnchorTagPrimaryButton href={"/"} ariaLabel={"Tidspunkt"}>
-                    {time}
-                  </AnchorTagPrimaryButton>
-                </li>
-              ))}
+             {(timesByDate.get(selected.getTime()) || []).map(
+            ({ time, billet }) => (
+              <li key={time}>
+                <AnchorTagPrimaryButton target="_blank"
+                  href={billet}
+                  ariaLabel={`Book billet kl. ${time}`}
+                >
+                  {time}
+                </AnchorTagPrimaryButton>
+              </li>
+            )
+          )}
             </ul>
           ) : (
             <span>Vælg en dato</span>

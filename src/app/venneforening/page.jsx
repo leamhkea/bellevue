@@ -11,9 +11,11 @@ const Venneforening = () => {
       <HeroVenner />
       <Server />
       <MedlemsGoder />
+      <section>
       <BlivMedlem />
       <VennerQuestion />
       <BookBilletter />
+      </section>
     </div>
   );
 };

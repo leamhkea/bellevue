@@ -2,7 +2,7 @@ import BellevueStriber from "@/components/global/animationer/BellevueStriber";
 import SingleCard from "@/components/singleview/SingleCard";
 import { createClient } from "@supabase/supabase-js";
 import Image from "next/image";
-
+import Pause from "@/components/singleview/Pause";
 // Brug præcis samme opsætning som ListServer
 const supabase = createClient(
   "https://rzwaokiepaobrlrpphia.supabase.co",
@@ -29,7 +29,11 @@ export default async function SingleItem({ params }) {
 
   return (
     <div className="relative">
-      <SingleCard item={data} />
+      <SingleCard
+      item={data}
+      pauseSlot={data.pause ? <Pause item={data} /> : null}
+    />
+
 
       <div className="absolute right-0 top-230 -z-5 hidden lg:block rotate-180">
         <Image src="/svg/snoerkel-left.svg" alt="" width={350} height={350} />

@@ -1,4 +1,4 @@
-import FindRundt from "../global/komponenter/interaktivtkort/FindRundt";
+import FindRundtServer from "../global/komponenter/interaktivtkort/FindRundtServer";
 const Pause = ({ item }) => {
   return (
     <div className="text-center p-10 flex flex-col gap-5">
@@ -16,7 +16,7 @@ const Pause = ({ item }) => {
           dig i foryeeren.
         </p>
       </div>
-      <FindRundt />
+      <FindRundtServer />
     </div>
   );
 };

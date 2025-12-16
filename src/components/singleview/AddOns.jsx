@@ -44,7 +44,7 @@ const AddOns = ({ addOn }) => {
       </div>
 
       {/* Billede + Knappen */}
-      <div className="flex flex-col items-center flex-1">
+      <div className="flex flex-col items-center flex-1 max-w-70 max-h-70">
         {addOn.billede?.url && (
           <Image
             src={addOn.billede.url}

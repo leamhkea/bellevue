@@ -20,12 +20,20 @@ const LandingPageSamlet = () => {
       <div className="absolute -right-1 top-650 -z-5 hidden lg:block"></div>
       <div className="flex flex-col gap-30">
         <FindVej />
-        <section>
+        <section className="pt-20">
           <HighlightCards items={highlightItems} textAs="h3" />
         </section>
-        <section>
+        <div className="relative pb-10">
           <Nyhedsbrev />
-        </section>
+   <div className="absolute right-0 -bottom-40 -z-10 hidden lg:block rotate-180">
+              <Image
+                src="/svg/snoerkel-top-right.svg"
+                alt=""
+                width={600}
+                height={350}
+                />
+            </div>
+                </div>
       </div>
     </div>
   );

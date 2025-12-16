@@ -6,7 +6,7 @@ import {
   DropdownMenuTrigger,
   DropdownMenuContent,
   DropdownMenuItem,
-} from "@/components/global/komponenter/DropdownInner";
+} from "./DropdownInner";
 
 export default function ReusableDropdown({ label, items = [], onSelect }) {
   const [open, setOpen] = useState(false);

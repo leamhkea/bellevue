@@ -6,7 +6,7 @@ const KontaktHero = () => (
     <section className="pb-20">
       <h1 className="text-(--bellevueblaa-600)">KONTAKT</h1>
 
-      <p className="font-light pt-20">
+      <p className="max-w-150 pt-10">
         Hos Bellevue Teatret vil vi gerne gøre det nemt for dig at komme i
         kontakt med os. Uanset om du har spørgsmål til billetter, arrangementer,
         praktiske forhold eller blot er nysgerrig på livet bag kulissen, står vi

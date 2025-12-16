@@ -4,7 +4,7 @@ import Calender from "../global/ikoner/Calender";
 import Clock from "../global/ikoner/Clock";
 import AnchorTagPrimaryButton from "../global/knapper/AnchorTagPrimaryButton";
 
-const StickyInfo = ({ item }) => {
+const StickyInfo = ({ item, isArchived}) => {
   return (
     <div className="flex flex-col gap-20 max-w-200 p-10">
       <div className="h-full z-10 flex gap-20">
@@ -36,9 +36,11 @@ const StickyInfo = ({ item }) => {
           </div>
         </div>
       </div>
-      <AnchorTagPrimaryButton href={"/"} ariaLabel={"Køb billet"}>
+      {!isArchived ?(
+      <AnchorTagPrimaryButton href={item.billetter} ariaLabel={"Køb billet"}>
         Køb billet
       </AnchorTagPrimaryButton>
+      ):null}
     </div>
   );
 };

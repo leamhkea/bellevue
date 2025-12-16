@@ -11,10 +11,9 @@ import Medvirkende from "./Medvirkende";
 import Anmeldelser from "./Anmeldelser";
 import { getItemStatus } from "@/app/library/utils.js";
 import SpisPaaTeatret from "./SpisPaaTeatret";
-import Pause from "./Pause";
 import GoBackArrow from "../global/navigation/GoBackArrow";
 
-export default function SingleCard({ item }) {
+export default function SingleCard({ item, pauseSlot }) {
   if (!item) return <p>Item ikke fundet</p>;
 
   const { isArchived } = getItemStatus(item);
@@ -30,7 +29,7 @@ export default function SingleCard({ item }) {
       <GoBackArrow />
       <section className="flex flex-col md:flex-row w-full">
         {!isArchived && <DatoOversigt item={item} />}
-        <StickyInfo item={item} />
+        <StickyInfo isArchived={isArchived} item={item} />
       </section>
 
       <BellevueStriber>
@@ -47,7 +46,6 @@ export default function SingleCard({ item }) {
           )}
         </section>
       </BellevueStriber>
-      <div>{item.pause ? <Pause item={item} /> : null}</div>
 
       {item.add_ons?.length > 0 && (
         <div className="h-[210vh] lg:h-screen w-screen">
@@ -64,6 +62,8 @@ export default function SingleCard({ item }) {
           )}
         </div>
       )}
+
+      <div>{pauseSlot}</div>
 
       {item.spisning && <SpisPaaTeatret />}
 

@@ -3,7 +3,7 @@ import ListCard from "../listview/forestillinger/ListCard";
 import { parseDates } from "@/app/library/utils";
 import { useMemo } from "react";
 import ResponsiveKarrusel from "../global/komponenter/ResponsiveKarrusel";
-import ArrowXPositionRight from "../global/animationer/ArrowXPosition";
+import { groupShowsByDate} from "@/app/library/utils";
 import PrimaryLink from "../global/knapper/PrimaryLink";
 import Image from "next/image";
 
@@ -11,7 +11,7 @@ const SlidingForestillinger = ({ data }) => {
   const now = new Date();
   const threeMonthsAhead = new Date();
   threeMonthsAhead.setMonth(threeMonthsAhead.getMonth() + 3);
-
+  
   const itemsWithLatestDate = useMemo(
     () => parseDates(data, { addLatestDate: true }),
     [data]
@@ -21,6 +21,14 @@ const SlidingForestillinger = ({ data }) => {
     const d = item.latestDate;
     return d >= now && d <= threeMonthsAhead;
   });
+  const grouped = useMemo(() => groupShowsByDate(upcoming, { onlyFuture: true }), [
+  upcoming,
+]);
+
+const allShows = grouped.flatMap(group => group.shows.map(show => show.item));
+
+// Fjern dubletter baseret på item.id
+const uniqueShows = Array.from(new Map(allShows.map(item => [item.id, item])).values());
 
   return (
     <section>
@@ -37,10 +45,11 @@ const SlidingForestillinger = ({ data }) => {
         </PrimaryLink>
       </div>
       <ResponsiveKarrusel>
-        {upcoming.map((item) => (
-          <ListCard key={item.id} item={item} />
-        ))}
-      </ResponsiveKarrusel>
+      {uniqueShows.map(item => (
+        <ListCard key={item.id} item={item} />
+      ))}
+    </ResponsiveKarrusel>
+
     </section>
   );
 };
