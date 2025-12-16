@@ -21,6 +21,9 @@ const interactiveIds = [
   "handicaptoilet",
   "sydgarderobe",
   "nordgarderobe",
+  "merch",
+  "cafeen",
+  "foyeren"
 ];
 //blokerer facaderne, så interactiveIds bliver klikbare
 const nonInteractiveIds = ["facade", "facade.001", "facade.002", "facade.003"];
@@ -174,29 +177,27 @@ function Model({ onMeshClick, hoveredId, setHoveredId, selected }) {
   );
 }
 
+
+
+
 function formatIdLabel(id) {
-  switch (id) {
+  switch(id) {
     case "nordbar":
     case "sydbar":
     case "foyerbar":
-    case "øvrebar":
-      return "Barer";
+    case "øvrebar": return "Barer";
 
     case "gulv":
-    case "balkon":
-      return "Salen";
+    case "balkon": return "Salen";
 
     case "nordtoilet":
     case "sydtoilet":
-    case "handicaptoilet":
-      return "Toiletter";
+    case "handicaptoilet": return "Toiletter";
 
     case "nordgarderobe":
-    case "sydgarderobe":
-      return "Garderobe";
+    case "sydgarderobe": return "Garderobe";
 
-    case "billetkontor":
-      return "Billetkontor";
+    case "billetkontor": return "Billetkontor";
   }
 }
 
@@ -258,17 +259,18 @@ export default function FindRundt({ item }) {
 
   return (
     <>
-      <div className="h-screen relative flex">
-        <div className="flex flex-col w-fit gap-10 sticky p-15">
-          {buttons.map(({ id, label }) => (
-            <PrimaryButton
-              key={id}
-              onClick={() => setSelected(id)}
-              active={formatIdLabel(id) === formatIdLabel(select)}
-            >
-              {label}
-            </PrimaryButton>
-          ))}
+    <div className="h-screen relative flex">
+      <div className="flex flex-col w-fit gap-10 sticky p-15">
+       {buttons.map(({ id, label }) => (
+        <PrimaryButton
+          key={id}
+          onClick={() => setSelected(id)}
+          active={formatIdLabel(id) === formatIdLabel(select)}
+        >
+          {label}
+        </PrimaryButton>
+      ))}
+
         </div>
 
         {/* Infoboks */}
