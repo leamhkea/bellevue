@@ -59,8 +59,8 @@ const Footer = () => {
             <Image
               src="/svg/insta-icon.svg"
               alt="Instagram"
-              width={60}
-              height={80}
+              width={20}
+              height={20}
             />
           </a>
 
@@ -72,8 +72,8 @@ const Footer = () => {
             <Image
               src="/svg/facebook-icon.svg"
               alt="Facebook"
-              width={40}
-              height={80}
+              width={20}
+              height={20}
             />
           </a>
         </div>
