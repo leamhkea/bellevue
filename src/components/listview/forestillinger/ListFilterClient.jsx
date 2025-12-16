@@ -150,7 +150,7 @@ export default function ListFilterClient({ items }) {
         {/* Underline kun på store skærme */}
         <div className="hidden md:block">
           <WipeLineAnimation activeTab={activeTab} tabWidths={tabWidths} />
-        </div>{" "}
+        </div>
       </div>
 
       <div className="max-w-150 flex flex-col gap-5">

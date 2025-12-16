@@ -179,7 +179,7 @@ const DatoOversigt = ({ item }) => {
             <ul className="flex gap-10">
               {(timesByDate.get(selected.getTime()) || []).map((time) => (
                 <li key={time}>
-                  <AnchorTagPrimaryButton href={"/"}>
+                  <AnchorTagPrimaryButton href={"/"} ariaLabel={"Tidspunkt"}>
                     {time}
                   </AnchorTagPrimaryButton>
                 </li>

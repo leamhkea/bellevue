@@ -42,11 +42,9 @@ export default function ListCard({ item, medlemstilbud, archive }) {
           {medlemstilbud ? (
             <div>
               <p className="font-extralight pt-2 text-md">
-                {" "}
                 {item.venne_fordele[0]?.dato}
               </p>
               <p className="pt-2 text-md">
-                {" "}
                 {item.venne_fordele[0]?.billet_antal}
               </p>
             </div>
@@ -64,17 +62,26 @@ export default function ListCard({ item, medlemstilbud, archive }) {
             <div>
               {medlemstilbud ? (
                 // Note: Skal være scroll to anchor tag
-                <ScrollToPrimaryButton scrollToId="bookbilletter">
+                <ScrollToPrimaryButton
+                  scrollToId="bookbilletter"
+                  ariaLabel={"Find billetter"}
+                >
                   Find billetter
                 </ScrollToPrimaryButton>
               ) : (
-                <AnchorTagPrimaryButton href={`/forestillinger/${item.id}`}>
+                <AnchorTagPrimaryButton
+                  href={`/forestillinger/${item.id}`}
+                  ariaLabel={"Køb billet"}
+                >
                   Køb billet
                 </AnchorTagPrimaryButton>
               )}
             </div>
             <div>
-              <SecondaryButton href={`/forestillinger/${item.id}`}>
+              <SecondaryButton
+                href={`/forestillinger/${item.id}`}
+                ariaLabel={"Læs Mere"}
+              >
                 Læs Mere
               </SecondaryButton>
             </div>

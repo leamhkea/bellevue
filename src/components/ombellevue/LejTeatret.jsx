@@ -44,7 +44,10 @@ const LejTeatret = () => {
             på.
           </p>
           <div className="self-center pt-8">
-            <AnchorTagPrimaryButton href={`mailto:adm@bellevueteatret.dk`}>
+            <AnchorTagPrimaryButton
+              href={`mailto:adm@bellevueteatret.dk`}
+              ariaLabel={"Kontakt os"}
+            >
               Kontakt os
             </AnchorTagPrimaryButton>
           </div>

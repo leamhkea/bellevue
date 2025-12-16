@@ -118,6 +118,7 @@ const FlipCategories = ({ data }) => {
             <PrimaryLink
               href={`/forestillinger?category=${encodeURIComponent(category)}`}
               key={category}
+              ariaLabel={"Kategori"}
             >
               {category}
             </PrimaryLink>

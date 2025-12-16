@@ -48,7 +48,10 @@ const MedlemsGoder = () => (
         </div>
       </div>
       <div className="mt-auto flex justify-center pt-20">
-        <ScrollToTertiaryButton scrollToId="blivmedlem">
+        <ScrollToTertiaryButton
+          scrollToId="blivmedlem"
+          ariaLabel={"Bliv medlem"}
+        >
           Bliv medlem
         </ScrollToTertiaryButton>
       </div>

@@ -127,6 +127,7 @@ const KalenderSamlet = ({ items }) => {
             <PrimaryButton
               key={filter.type}
               onClick={() => removeFilter(filter.type)}
+              ariaLabel={"Kategori"}
             >
               {filter.label} ×
             </PrimaryButton>

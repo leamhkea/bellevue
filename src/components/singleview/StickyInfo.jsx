@@ -36,17 +36,9 @@ const StickyInfo = ({ item }) => {
           </div>
         </div>
       </div>
-      <AnchorTagPrimaryButton href={"/"}>Køb billet</AnchorTagPrimaryButton>
-
-      {/* {item.embed ? (
-            <iframe title={`trailer af ${item.name}`}
-                    src={item.embed}
-                    className="h-80 w-full rounded-lg"
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                    ></iframe>
-          ) : null  } */}
+      <AnchorTagPrimaryButton href={"/"} ariaLabel={"Køb billet"}>
+        Køb billet
+      </AnchorTagPrimaryButton>
     </div>
   );
 };

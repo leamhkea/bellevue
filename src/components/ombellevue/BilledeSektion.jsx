@@ -46,7 +46,7 @@ const BilledeSektion = () => {
         <p>Ved spørgsmål bedes du kontakte os på mail:</p>
 
         <div className="self-center">
-          <AnchorTagPrimaryButton href={`/kontakt`}>
+          <AnchorTagPrimaryButton href={`/kontakt`} ariaLabel={"Kontakt os"}>
             Kontakt os
           </AnchorTagPrimaryButton>
         </div>

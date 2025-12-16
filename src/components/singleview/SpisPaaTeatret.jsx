@@ -34,6 +34,7 @@ const SpisPaaTeatret = () => {
             <AnchorTagPrimaryButton
               href="https://www.ticketmaster.dk/artist/bellevue-spisning-billetter/1023312?brand=dk_bellevue&language=da-dk"
               target="_blank"
+              ariaLabel={"Køb smørrebrød"}
             >
               Køb smørrebrød
             </AnchorTagPrimaryButton>

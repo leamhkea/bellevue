@@ -7,9 +7,8 @@ const Hero = () => {
     <div role="banner" aria-label="Bellevue Teatret introduktion">
       <BellevueStriber>
         <section className="relative mx-auto max-screen-xl px-6 pt-32 md:pt-40">
-
           {/* Titel */}
-         <div className="md:w-100 lg:w-250">
+          <div className="md:w-100 lg:w-250">
             <h1 className="display bellevueblaa-600 indent-5 moerkblaa-600">
               Bellevue
             </h1>
@@ -17,8 +16,7 @@ const Hero = () => {
             <h2 className="display font-thin koboltblaa-600 text-right">
               Teatret
             </h2>
-         </div>
-       
+          </div>
 
           {/* Tekst + illustration */}
           <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-10 relative">

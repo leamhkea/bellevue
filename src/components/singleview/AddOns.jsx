@@ -64,6 +64,7 @@ const AddOns = ({ addOn }) => {
             style={{ color: addOn.text_hex }}
             target="blank"
             href={addOn.billet}
+            ariaLabel={"Køb billet"}
           >
             {`Køb ${addOn.titel}`}
           </AnchorTagPrimaryButton>
