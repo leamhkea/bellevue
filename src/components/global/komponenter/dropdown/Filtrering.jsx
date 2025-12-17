@@ -12,7 +12,7 @@ export default function Filtrering({
   renderCard,          // Callback til hvordan kort skal vises
   introTitle,
   introText,
-  allowMultipleTimes = false
+  allowMultipleTimes = false 
 }) {
   if (!items?.length) return <p>Ingen forestillinger eller events fundet.</p>;
 
@@ -139,7 +139,7 @@ export default function Filtrering({
         );
     }, [baseItems]);
     
-    
+    //henter filtrering fra utils
       const dateOptions = useMemo(
         () => orderedBaseItems.map(({ date }) => formatDate(date)),
         [orderedBaseItems]
