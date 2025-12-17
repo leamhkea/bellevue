@@ -10,6 +10,7 @@ export default function KalenderSamlet({ items }) {
       items={items}
       onlyFuture={true}
       showTabs={false}
+      allowMultipleTimes={true}
       introTitle="Find din næste teateroplevelse"
       introText="Få overblikket over alle kommende forestillinger, koncerter og arrangementer. Brug filtrene til at sortere efter dato, kategori eller målgruppe – og book nemt dine billetter direkte i kalenderen."
       renderCard={(filteredGrouped, formatDate) => (
